@@ -1,0 +1,32 @@
+.header {
+    width: 90%;
+    margin: auto;
+    padding: 1.6rem;
+    border-bottom: 1px solid var(--primary-normal);
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.title {
+    font-size: clamp(2.4rem, 2.8rem + 0.8vw, 4rem);
+    text-align: center;
+}
+
+.navDesktop {
+    display: none;
+
+    @media screen and (min-width:960px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.navMobile {
+    display: block;
+
+    @media screen and (min-width:960px) {
+        display: none;
+    }
+}

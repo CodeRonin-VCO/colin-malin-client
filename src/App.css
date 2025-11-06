@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    font-family: "Atkinson Hyperlegible";
+    color-scheme: light dark;
+    color: var(--text-normal);
+    background-color: var(--bg-normal);
+}
+
+h1 {
+    font-family: "Anton";
+}
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    main {
+        flex-grow: 1;
+    }
+}

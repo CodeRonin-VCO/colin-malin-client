@@ -1,0 +1,93 @@
+.form {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2.4rem;
+    border-radius: .8rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 3.2rem;
+}
+
+.input_group {
+    margin-bottom: 1.6rem;
+    display: flex;
+    flex-direction: column;
+
+    label {
+        margin-bottom: .6rem;
+    }
+
+    input {
+        padding: .8rem;
+        color: var(--text-normal);
+        background-color: var(--bg-input-normal);
+        border: none;
+        outline: none;
+        
+        &:focus {
+            border-bottom: 1px solid var(--primary-normal);
+        }
+    }
+}
+
+.btn_submit {
+    margin: 3.2rem 0;
+    padding: .8rem 3.2rem;
+    align-self: center;
+    background-color: var(--primary-normal);
+    border: none;
+    border-radius: 3.2rem;
+    transition: .3s all ease-out;
+
+    &:hover {
+        background-color: var(--primary-dark);
+    }
+}
+
+.required {
+    margin-left: 1.6rem;
+    font-size: clamp(0.8rem, 0.9rem + 0.2vw, 1.1rem);
+    color: var(--primary-normal);
+    font-family: "Arvo";
+    text-transform: uppercase;
+}
+
+.error_msg, .success_msg {
+    font-size: clamp(0.8rem, 0.9rem + 0.2vw, 1.1rem);
+    color: var(--danger-normal);
+    font-family: "Arvo";
+    text-align: center;
+}
+
+.success_msg {
+    color: var(--success-normal);
+}
+
+.register_link {
+    margin-top: 3.2rem;
+    font-size: clamp(1rem, 1.1rem + 0.3vw, 1.4rem);
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_switch {
+    padding: .4rem .8rem;
+    font-size: clamp(1rem, 1.1rem + 0.3vw, 1.4rem);
+    color: var(--text-normal);
+    background-color: transparent;
+    border: 0;
+    border-radius: .8rem;
+    transform-origin: right;
+    transition: .3s all ease-out;
+
+    &:hover,
+    &:active {
+        color: var(--primary-normal);
+        text-decoration: underline;
+    }
+}
