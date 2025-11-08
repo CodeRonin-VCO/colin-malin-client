@@ -9,3 +9,6 @@ export const userAtom = atomWithStorage("user", null);
 
 // Atom for state connexion
 export const isAuthenticatedAtom = atom((get) => !!get(tokenAtom));
+
+// Atom for game config
+export const gameConfigAtom = atomWithStorage("game config", null);

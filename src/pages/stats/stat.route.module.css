@@ -1,0 +1,58 @@
+.main {
+    padding: 5rem 0;
+    margin: auto;
+    width: 90%;
+    display: flex;
+}
+
+.sidebar {
+    width: 100%;
+    padding: 1.6rem;
+    background-color: var(--bg-input-normal);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.6rem;
+    border-radius: .8rem;
+
+    @media screen and (min-width:960px) {
+        width: 20%;
+
+    }
+}
+
+.dash_item {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1rem;
+    color: var(--text-normal);
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+
+    &>span {
+        opacity: .6;
+    }
+
+    &>span:first-child {
+        font-size: 24px;
+        color: var(--solid-normal);
+    }
+
+    &>span:last-child {
+        margin-left: 1.6rem;
+    }
+
+    &.user_profile {
+        margin-bottom: 2.6rem;
+
+        &>span {
+            opacity: 1;
+        }
+    }
+
+    &:hover>span {
+        opacity: 1;
+    }
+}

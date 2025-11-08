@@ -1,8 +1,12 @@
 import FooterLayout from "../../layouts/footer/footer.jsx";
 import HeaderLayout from "../../layouts/header/header.jsx";
-import styles from "./getStarted.module.css";
+import styles from "./getStarted.route.module.css";
 import brain from "./../../assets/brain.png"
 import { Link } from "react-router";
+import { LuBrain } from "react-icons/lu";
+import { BsLightning } from "react-icons/bs";
+import { GoClock, GoPeople, GoTrophy } from "react-icons/go";
+import { PiTarget } from "react-icons/pi";
 
 export default function GetStartedPage() {
 
@@ -71,12 +75,49 @@ export default function GetStartedPage() {
                 <article className={styles.about}>
                     <h3>Pourquoi ce quiz ?</h3>
                     <p>Ce projet est né de l’envie de rendre l’apprentissage ludique et accessible. Que vous soyez curieux, compétiteur ou simplement joueur, notre plateforme vous permet de tester vos connaissances tout en vous amusant.</p>
+                    <div className={styles.grid_about}>
+                        <div className={`${styles.card_about} ${styles.card_about_theme}`}>
+                            <div className={styles.icon}><LuBrain /></div>
+                            <h6>7 Thèmes variés</h6>
+                            <p>Histoire, Sciences, Culture, Sport, Géographie, Sociologie et Toutes les thèmes. Trouvez la catégorie qui vous intéresse.</p>
+                        </div>
+                        
+                        <div className={`${styles.card_about} ${styles.card_about_timer}`}>
+                            <div className={styles.icon}><BsLightning /></div>
+                            <h6>Timer de 10 secondes</h6>
+                            <p>Répondez rapidement ! Chaque question vous donne 10 secondes pour trouver la bonne réponse.</p>
+                        </div>
+
+                        <div className={`${styles.card_about} ${styles.card_about_diff}`}>
+                            <div className={styles.icon}><GoTrophy /></div>
+                            <h6>Niveau de difficulté</h6>
+                            <p>Facile, Moyen, Difficile. Progressez à votre rythme et relevez des défis adaptés à votre niveau.</p>
+                        </div>
+
+                        <div className={`${styles.card_about} ${styles.card_about_multi}`}>
+                            <div className={styles.icon}><GoPeople /></div>
+                            <h6>Mode Multi-joueur</h6>
+                            <p>Défiez vos amis en temps réel. Comparez vos scores et devenez champion parmi vos amis.</p>
+                        </div>
+
+                        <div className={`${styles.card_about} ${styles.card_about_stat}`}>
+                            <div className={styles.icon}><PiTarget /></div>
+                            <h6>Statistiques détaillées</h6>
+                            <p>Suivez votre progression avec des graphiques détaillés et analysez vos performances.</p>
+                        </div>
+
+                        <div className={`${styles.card_about} ${styles.card_about_pers}`}>
+                            <div className={styles.icon}><GoClock /></div>
+                            <h6>Partie personnalisée</h6>
+                            <p>Choisissez vos paramètres: nombre de questions (5-50), thèmes, difficulté et mode de jeu.</p>
+                        </div>
+                    </div>
                 </article>
 
                 <article className={styles.color_box}>
                     <div className={styles.green_box}>
                         <h3>+300k Users</h3>
-                        <p><small>and counting</small></p>
+                        <p><small>and counting...</small></p>
                     </div>
                     <div className={styles.pink_box}>
                         <h3>100% Free!</h3>

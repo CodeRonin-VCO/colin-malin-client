@@ -75,6 +75,10 @@
     position: relative;
     overflow: hidden;
 
+    p {
+        flex-grow: 1;
+    }
+
     &:hover {
         &::before {
             opacity: 0.1;
@@ -273,10 +277,89 @@
     h3 {
         margin-bottom: 2rem;
     }
+}
 
-    p {
-        width: 70%;
-        margin: auto;
+.grid_about {
+    margin-top: 5rem;
+    margin-left: 3.6rem;
+    text-align: left;
+    display: grid;
+    gap: 3.6rem;
+
+    @media screen and (min-width:960px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card_about {
+        display: flex;
+        flex-direction: column;
+        padding: 1.6rem;
+        position: relative;
+
+        &>h6 {
+            margin: 1.6rem 0;
+        }
+
+        &>p {
+            color: var(--text-neutral-normal);
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -1.6rem;
+            bottom: 0;
+            width: 3px;
+            height: 100%;
+            background-color: var(--solid-normal);
+        }
+    }
+
+    .card_about_theme {
+        .icon {
+            color: var(--solid-normal);
+        }
+    }
+    .card_about_timer {
+        &::before {
+            background-color: var(--secondary-normal);
+        }
+        .icon {
+            color: var(--secondary-normal);
+        }
+    }
+    .card_about_diff {
+        &::before {
+            background-color: var(--primary-normal);
+        }
+        .icon {
+            color: var(--primary-normal);
+        }
+    }
+    .card_about_multi {
+        &::before {
+            background-color: var(--warning-normal);
+        }
+        .icon {
+            color: var(--warning-normal);
+        }
+    }
+    .card_about_stat {
+        &::before {
+            background-color: var(--danger-normal);
+        }
+        .icon {
+            color: var(--danger-normal);
+        }
+    }
+    .card_about_pers {
+        &::before {
+            background-color: var(--info-normal);
+        }
+        .icon {
+            color: var(--info-normal);
+        }
     }
 }
 
