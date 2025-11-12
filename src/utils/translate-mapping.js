@@ -12,6 +12,7 @@ const THEME_MAP = {
 };
 
 const DIFFICULTY_MAP = {
+    all: "Mix",
     high: "Élevée",
     medium: "Moyenne",
     low: "Faible",

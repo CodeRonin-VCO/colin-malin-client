@@ -25,3 +25,6 @@ function App() {
 }
 
 export default App;
+
+
+// TODO : Gérer l'expiration du token et l'expulsion vers la page d'accueil

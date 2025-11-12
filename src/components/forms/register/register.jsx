@@ -2,11 +2,12 @@ import { useActionState } from "react";
 import styles from "./register.module.css";
 import useAuth from "../../../hooks/useAuth.js";
 import { validatePassword } from "../../../utils/validation.js";
+import { useNavigate } from "react-router";
 
 
 export default function RegisterForm({ setSwitchForm }) {
-    // todo: exemple connection DB
     const { fetchRegister } = useAuth();
+    const navigate = useNavigate();
 
     async function registerAction(prevState, formData) {
         const data = {
@@ -39,8 +40,7 @@ export default function RegisterForm({ setSwitchForm }) {
         // todo: Connection with DB
         try {
             await fetchRegister(data.username, data.email, data.password);
-            // navigate("/wherever-you-like");
-            // more stuff to do...
+            navigate("/getStarted");
 
             return {
                 data,

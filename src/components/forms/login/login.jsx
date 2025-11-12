@@ -1,11 +1,12 @@
 import { useActionState } from "react";
 import useAuth from "../../../hooks/useAuth.js";
 import styles from "./login.module.css";
+import { useNavigate } from "react-router";
 
 
 export default function LoginForm({ setSwitchForm }) {
-    // todo: exemple connection DB
     const { fetchLogin } = useAuth();
+    const navigate = useNavigate();
 
     async function loginAction(prevState, formData) {
         const data = {
@@ -24,11 +25,9 @@ export default function LoginForm({ setSwitchForm }) {
             }
         };
 
-        // todo: Connection with DB
         try {
             await fetchLogin(data.email, data.password);
-            // navigate("/wherever-you-like");
-            // more stuff to do...
+            navigate("/getStarted");
 
             return {
                 data,

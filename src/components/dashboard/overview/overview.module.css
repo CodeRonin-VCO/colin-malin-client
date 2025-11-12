@@ -1,0 +1,65 @@
+.overview {
+    padding: 0 3rem;
+    margin: 0 3rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1.6fr 1.4fr;
+    grid-template-rows: 170px 270px 230px;
+    gap: 1rem;
+
+    &>div {
+        padding: 1rem 1.6rem;
+        border-radius: .8rem;
+    }
+}
+
+.nb_part {
+    grid-area: 1 / 1 / 2 / 2;
+}
+.correct_answer {
+    grid-area: 1 / 2 / 2 / 3;
+}
+.avg_score {
+    grid-area: 1 / 3 / 2 / 4;
+}
+.best_score {
+    grid-area: 1 / 4 / 2 / 5;
+}
+:where(.nb_part, .correct_answer, .avg_score, .best_score) {
+    text-align: center;
+    background-color: var(--secondary20-normal);
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &>p:last-child {
+        font-size: clamp(1rem, 1.1rem + 0.3vw, 1.4rem);
+        color: var(--solid-normal);
+    }
+}
+
+.progress_byDate {
+    grid-area: 2 / 1 / 3 / 4;
+}
+.most_played_theme {
+    grid-area: 2 / 4 / 3 / 5;
+    color: var(--text-inverted-normal);
+    background: linear-gradient(160deg,var(--primary-normal),var(--solid-normal));
+}
+.progress_byDifficulty {
+    grid-area: 3 / 1 / 4 / 3;
+}
+.progress_bytheme {
+    grid-area: 3 / 3 / 4 / 5;
+}
+
+:where(.progress_byDate, .progress_byDifficulty, .progress_bytheme)  {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-input-normal);
+}

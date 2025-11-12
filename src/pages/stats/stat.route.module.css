@@ -1,4 +1,5 @@
 .main {
+    max-width: 1100px;
     padding: 5rem 0;
     margin: auto;
     width: 90%;
@@ -24,7 +25,7 @@
 .dash_item {
     width: 90%;
     margin: 0 auto;
-    padding: 1rem;
+    padding: .8rem 1.6rem;
     color: var(--text-normal);
     background-color: transparent;
     border: none;
@@ -36,6 +37,7 @@
     }
 
     &>span:first-child {
+        width: 100px;
         font-size: 24px;
         color: var(--solid-normal);
     }
@@ -46,6 +48,7 @@
 
     &.user_profile {
         margin-bottom: 2.6rem;
+        border-bottom: 1px solid var(--borders-normal);
 
         &>span {
             opacity: 1;
@@ -55,4 +58,9 @@
     &:hover>span {
         opacity: 1;
     }
+}
+
+.isSelected {
+    background-color: var(--secondary20-normal);
+    border-radius: 3.2rem;
 }

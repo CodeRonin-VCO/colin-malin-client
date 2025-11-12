@@ -3,9 +3,11 @@ import styles from "./config-game.module.css";
 import { useAtom } from "jotai";
 import { gameConfigAtom } from "../../../atom/atom.js";
 import { useNavigate } from "react-router";
+import useQuestions from "../../../hooks/useQuestions.js";
 
 export default function ConfigGameForm() {
     // todo: connexion db
+    // Connexion avec game pour stocker la partie et les questions
     const [gameConfig, setGameConfig] = useAtom(gameConfigAtom);
     const [activeDifficulty, setActiveDifficulty] = useState("");
     const [activeTheme, setActiveTheme] = useState([]);
@@ -53,9 +55,9 @@ export default function ConfigGameForm() {
         };
 
         try {
+            setGameConfig(data);
             // Todo: connexion db
             // await fetchCreateGames(data);
-            setGameConfig(data);
             navigate("/quiz");
 
             return {

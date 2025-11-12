@@ -1,0 +1,28 @@
+.searchbar_container {
+    max-width: 500px;
+    margin: 0 auto 3.2rem;
+    position: relative;
+    width: 100%;
+}
+
+.search_icon {
+    position: absolute;
+    top: 50%;
+    left: 1.2rem;
+    transform: translateY(-50%);
+    color: #888;
+    pointer-events: none;
+}
+
+.searchbar {
+    width: 100%;
+    padding: .8rem 1.2rem .8rem 4.2rem;
+    color: var(--text-normal);
+    background-color: var(--bg-input-normal);
+    border: none;
+    outline: none;
+
+    &:focus {
+        border-bottom: 1px solid var(--primary-normal);
+    }
+}

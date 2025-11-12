@@ -12,3 +12,6 @@ export const isAuthenticatedAtom = atom((get) => !!get(tokenAtom));
 
 // Atom for game config
 export const gameConfigAtom = atomWithStorage("game config", null);
+
+// Atom for questions
+export const questionsAtom = atomWithStorage("questions", null);

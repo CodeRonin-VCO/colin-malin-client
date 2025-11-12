@@ -33,7 +33,7 @@ export default function useAuth() {
 
     const fetchLogout = async () => {
         try {
-            await authService.logout();
+            await authService.logOut();
 
         } finally {
             setToken(null);

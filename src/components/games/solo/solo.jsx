@@ -1,26 +1,37 @@
 import { useAtom } from "jotai";
 import styles from "./solo.module.css";
-import { gameConfigAtom } from "../../../atom/atom.js";
+import { questionsAtom, userAtom } from "../../../atom/atom.js";
 import { useEffect, useRef, useState } from "react";
+import useQuestions from "./../../../hooks/useQuestions.js";
+import { GiCheckMark, GiCrossMark } from "react-icons/gi";
+import { useNavigate } from "react-router";
+import { THEME_MAP, translateValue } from "../../../utils/translate-mapping.js";
+import QuizResultsPopup from "../../modal/popup-quizResults/popup-quizResults.jsx";
 
 export default function SoloGame() {
-    const [gameConfig] = useAtom(gameConfigAtom); //nb_question, difficulty, [theme], mode,
-    // todo: connexion to db
-    // const questions = await getFilteredQuestions(gameConfig);
-    
+    const [user, setUser] = useAtom(userAtom);
+    const [questions, setQuestions] = useAtom(questionsAtom);
+    const { fetchFiltered } = useQuestions();
+    const navigate = useNavigate();
+
     // Question en cours
     const [questionCount, setQuestionCount] = useState(0);
-    
+    const currentQuestion = Array.isArray(questions) ? questions[questionCount] : null;
+
     // Cliquer sur une réponse
     const [selectedAnswer, setSelectedAnswer] = useState(null);
-    
+
     // Vérifier la réponse
     const [isCorrect, setIsCorrect] = useState(null);
-    
+
+    // Attribution joueur et points
+    const [answersLog, setAnswersLog] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+
     // Timer
     const [timer, setTimer] = useState(10);
     const timeRef = useRef(null);
-    
+
     useEffect(() => {
         // Init timer
         setTimer(10);
@@ -46,47 +57,133 @@ export default function SoloGame() {
         return () => clearInterval(timeRef.current)
     }, [questionCount]);
 
+    useEffect(() => {
+        fetchFiltered();
+    }, []);
+
+
+    function handleAnswerClick(answer) {
+        if (selectedAnswer === null) {
+            setSelectedAnswer(answer);
+            setIsCorrect(answer === currentQuestion.correct_answer);
+            clearInterval(timeRef.current);
+
+            setAnswersLog(prev => [
+                ...prev,
+                {
+                    id: currentQuestion.id,
+                    question: currentQuestion.question,
+                    theme: currentQuestion.theme,
+                    correct: currentQuestion.correct_answer,
+                    given: answer,
+                    isCorrect: answer === currentQuestion.correct_answer,
+                }
+            ]);
+        }
+    };
+
+    function handleNextQuestion() {
+        if (questionCount < questions.length - 1) {
+            setQuestionCount(questionCount + 1);
+            setSelectedAnswer(null);
+            setIsCorrect(null);
+
+        } else {
+            setShowPopup(true);
+        }
+    }
+
+    function getScore() {
+        return answersLog.filter(a => a.isCorrect).length;
+    }
+
+
     return (
         <div className={styles.solo_game}>
-            <div className={styles.header}>
-                <hgroup>
-                    <h3>Quiz solo</h3>
-                    <h6>Question 5 sur 10</h6>
-                </hgroup>
-                <hgroup className={styles.timer}>
-                    <h3>10</h3>
-                    <h6>secondes</h6>
-                </hgroup>
-            </div>
+            {currentQuestion ? (
+                <>
+                    <div className={styles.header}>
+                        <hgroup>
+                            <h3>Quiz solo</h3>
+                            <h6>Question {questionCount + 1} sur {questions.length}</h6>
+                        </hgroup>
+                        <hgroup className={styles.timer}>
+                            <h3>{timer}</h3>
+                            <h6>secondes</h6>
+                        </hgroup>
+                    </div>
 
-            <div className={styles.container_progress_bar}>
-                <div className={styles.progress_bar}></div>
-            </div>
+                    <div className={styles.container_progress_bar}>
+                        <div className={styles.progress_bar} style={{ width: `${((questionCount + 1) / questions.length) * 100}%` }}></div>
+                    </div>
 
-            <div className={styles.container_question}>
-                <div className={styles.theme}>Sciences</div>
-                <h4>Quand a eu lieu la révolution française ?</h4>
-                <div className={styles.container_answers}>
-                    <button>
-                        <span>1776</span>
-                        <span>Faux</span>
-                    </button>
-                    <button>
-                        <span>1789</span>
-                        <span>Correct</span>
-                    </button>
-                    <button>
-                        <span>1876</span>
-                        <span>Faux</span>
-                    </button>
-                    <button>
-                        <span>1889</span>
-                        <span>Faux</span>
-                    </button>
-                </div>
-            </div>
+                    <div className={styles.container_question}>
+                        <div className={styles.theme}>{currentQuestion.theme}</div>
+                        <h4>{currentQuestion.question}</h4>
+                        <div className={styles.container_answers}>
+                            {currentQuestion.answers.map((a, i) => (
+                                <button
+                                    key={i}
+                                    onClick={timer === 0 ? undefined : () => handleAnswerClick(a)}
+                                    className={selectedAnswer === a
+                                        ? isCorrect
+                                            ? styles.correct
+                                            : styles.incorrect
+                                        : selectedAnswer === null && timer === 0
+                                            ? a === currentQuestion.correct_answer
+                                                ? styles.correct
+                                                : styles.incorrect
+                                            : "inherit"}>
+                                    <span>{a}</span>
+                                    <span>
+                                        {selectedAnswer === a && (
+                                            isCorrect ? (
+                                                <>
+                                                    <GiCheckMark /> &nbsp; Correct
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <GiCrossMark /> &nbsp; Faux
+                                                </>
+                                            )
+                                        )}
+                                        {timer === 0 && (
+                                            a === currentQuestion.correct_answer ? (
+                                                <>
+                                                    <GiCheckMark /> &nbsp; Correct
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <GiCrossMark /> &nbsp; Faux
+                                                </>
+                                            )
+                                        )}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
 
-            <button className={styles.btn_next}>Question suivante (ou voir les résultats)</button>
+                    <button className={styles.btn_next} onClick={handleNextQuestion} disabled={isCorrect === null}>
+                        {questionCount === questions.length - 1 ? "Fin du quiz" : "Question suivante"}
+                    </button>
+                    {isCorrect !== null && (
+                        <p className={styles.feedback}>
+                            {isCorrect ? "Bravo, c'est la bonne réponse ! 🎉" : `Incorrect. 😭 La bonne réponse était : ${currentQuestion.correct_answer}`}
+                        </p>
+                    )}
+                </>
+            ) : (
+                <p>Aucune question disponible avec cette configuration.</p>
+            )}
+
+            {showPopup && (
+                <QuizResultsPopup
+                    getScore={getScore}
+                    answersLog={answersLog}
+                    questions={questions}
+                />
+            )}
         </div>
     )
 }

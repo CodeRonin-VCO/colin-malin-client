@@ -157,7 +157,8 @@
     margin: 10rem auto;
     padding: 5.6rem 3.2rem;
     text-align: left;
-    background-color: var(--secondary20-normal);
+    background-color: var(--secondary10-normal);
+    border: 2px solid var(--borders-normal);
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -321,42 +322,52 @@
             color: var(--solid-normal);
         }
     }
+
     .card_about_timer {
         &::before {
             background-color: var(--secondary-normal);
         }
+
         .icon {
             color: var(--secondary-normal);
         }
     }
+
     .card_about_diff {
         &::before {
             background-color: var(--primary-normal);
         }
+
         .icon {
             color: var(--primary-normal);
         }
     }
+
     .card_about_multi {
         &::before {
             background-color: var(--warning-normal);
         }
+
         .icon {
             color: var(--warning-normal);
         }
     }
+
     .card_about_stat {
         &::before {
             background-color: var(--danger-normal);
         }
+
         .icon {
             color: var(--danger-normal);
         }
     }
+
     .card_about_pers {
         &::before {
             background-color: var(--info-normal);
         }
+
         .icon {
             color: var(--info-normal);
         }

@@ -19,7 +19,9 @@ export default function QuizPage() {
                 {!gameHasStarted && (
                     <ConfigPopup gameConfig={gameConfig} setGamehasStarted={setGamehasStarted} />
                 )}
-                <SoloGame />
+                {gameHasStarted && (
+                    <SoloGame />
+                )}
             </main>
             <FooterLayout />
         </div>
