@@ -4,32 +4,22 @@ Colin-Malin est une application de quiz interactive construite avec React, Expre
 
 ## Fonctionnalités
 
-    Authentification (inscription / connexion)
-
-    Configuration personnalisée du quiz (catégorie, difficulté, nombre de questions)
-
-    Quiz à choix multiples (4 réponses)
-
-    Statistiques détaillées après chaque session
-
-    Interface admin pour gérer les utilisateurs et les questions
-
-    Responsive design avec navigation mobile et desktop
-
-    Thème sombre avec palette personnalisée
+- Authentification (inscription / connexion)
+- Configuration personnalisée du quiz (catégorie, difficulté, nombre de questions)
+- Quiz à choix multiples (4 réponses)
+- Statistiques détaillées après chaque session
+- Interface admin pour gérer les utilisateurs et les questions
+- Responsive design avec navigation mobile et desktop
+- Thème sombre avec palette personnalisée
 
 ## Technologies
 
-    Front: React avec vite
-
-    Back: Node.js / Express.js
-
-    Base de données: PostgreSQL avec sequelize
+- Front: React avec Vite
+- Back: Node.js / Express.js
+- Base de données: PostgreSQL avec Sequelize
 
 ## À venir
 
-    Quiz multijoueur
-
-    Classement global
-
-    Mode hors-ligne
+- Quiz multijoueur
+- Classement global
+- Mode hors-ligne
