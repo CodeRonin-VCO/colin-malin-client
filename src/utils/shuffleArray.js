@@ -3,7 +3,7 @@
  * @param {Array} array - Le tableau à mélanger.
  * @returns {Array} Une nouvelle instance du tableau mélangé.
  */
-export function shuffleAnswers(array) {
+export function shuffleArray(array) {
     if (!Array.isArray(array)) return [];
 
     const shuffled = [...array];

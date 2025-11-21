@@ -1,28 +1,19 @@
-import { Chart as ChartJS, CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Filler } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip } from "chart.js";
+import { Bar } from "react-chartjs-2";
 import useScores from "../../../../hooks/useScores.js";
 import { useEffect, useState } from "react";
+import { DIFFICULTY_MAP } from "../../../../utils/translate-mapping.js";
 
 // ==== Chart.js ====
 ChartJS.register(
     CategoryScale,
     LinearScale,
-    PointElement,
-    LineElement,
+    BarElement,
     Title,
     Tooltip,
-    Filler
 )
 
-// ==== Fonction pour formater les dates ====
-function formatShortDate(isoDate) {
-    const date = new Date(isoDate);
-    const day = date.getDate();
-    const monthShort = date.toLocaleString('fr-BE', { month: 'short' });
-    return `${day} ${monthShort}.`;
-};
-
-// ==== Fonction pour calculer le premier et le dernier jour du mois passé==== 
+// ==== Fonction pour calculer le premier et le dernier jour du mois passé ====
 function getLastMonthDates() {
     const now = new Date();
     const startDate = new Date();
@@ -36,7 +27,7 @@ function getLastMonthDates() {
 }
 
 
-export default function ProgressByDateChart() {
+export default function ProgressByDifficultyChart() {
     const { fetchScoreByUserId } = useScores();
     const [scoresData, setScoresData] = useState([]);
 
@@ -56,37 +47,60 @@ export default function ProgressByDateChart() {
 
     }, [])
 
-    const dates = ["", ...scoresData.map((s) => formatShortDate(s.created_at))];
-    const scores = [0, ...scoresData.map((s) => (s.points / s.nb_questions) * 10)];
+    // ==== Initialisation des difficultés ====
+    const difficulties = ["low", "medium", "high", "all"];
+    const scoresByDiff = difficulties.reduce((acc, diff) => {
+        acc[diff] = { totalPoints: 0, totalQuestions: 0 };
+        return acc;
+    }, { all: { totalPoints: 0, totalQuestions: 0 } });
 
+    // ==== Remplissage des scores ====
+    scoresData.forEach(score => {
+        const diff = score.difficulty ?? "Unknown";
+        if (!scoresByDiff[diff]) scoresByDiff[diff] = { totalPoints: 0, totalQuestions: 0 };
+        scoresByDiff[diff].totalPoints += score.points;
+        scoresByDiff[diff].totalQuestions += score.nb_questions;
 
+        // Ajouter à "all"
+        scoresByDiff.all.totalPoints += score.points;
+        scoresByDiff.all.totalQuestions += score.nb_questions;
+    });
+
+    // ==== Préparer les données pour Chart.js ====
+    const labels = difficulties.map(diff => DIFFICULTY_MAP[diff]);
+    const dataValues = difficulties.map(diff => {
+        const entry = scoresByDiff[diff];
+        return entry.totalQuestions > 0 ? (entry.totalPoints / entry.totalQuestions) * 10 : 0;
+    });
     const data = {
-        labels: dates, // date en abcisse
+        labels,
         datasets: [{
-            label: "",
-            data: scores, // score en ordonnée
-            borderColor: "rgba(206, 39, 197, .5)",
-            backgroundColor: "#CE27C5",
-            borderWidth: 2, // taille de la ligne
-            pointRadius: 5, // taille des points
-            tension: 0.3,
-            fill: false
-        }]
-    }
+            label: "Score moyen",
+            data: dataValues,
+            backgroundColor: [
+                "#FFD700",
+                "#FF4500",
+                "#CE27C5",
+                "#00CED1",
+            ],
+            barThickness: 20, // épaisseur des barres
+        }],
+        
+    };
 
     const options = {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
             legend: { display: false },
-            title: { display: true, text: 'Progrès par date', color: "#F6F4F3", font: { size: 16 }, padding: { top: 10, bottom: 40 } },
+            title: { display: true, text: 'Progrès par difficulté', color: "#F6F4F3", font: { size: 16 }, padding: { top: 10, bottom: 40 } },
             tooltip: {
                 callbacks: {
                     label: (context) => {
-                        const index = context.dataIndex;
-                        if (index === 0) return "";
-                        const score = scoresData[index - 1]; // Décalage nécessaire
-                        return `Score: ${score.correct}/${score.total}`;
+                        const diffKey = difficulties[context.dataIndex];
+                        const entry = scoresByDiff[diffKey];
+                        const score = entry.totalQuestions > 0 ? ((entry.totalPoints / entry.totalQuestions) * 10).toFixed(1) : 0;
+                        return `Score: ${score}`;
                     },
                 },
             },
@@ -118,7 +132,7 @@ export default function ProgressByDateChart() {
 
     return (
         <>
-            <Line data={data} options={options} />
+            <Bar data={data} options={options} />
         </>
     )
 }

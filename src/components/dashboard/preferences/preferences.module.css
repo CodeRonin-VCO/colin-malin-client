@@ -1,0 +1,25 @@
+.preferences {
+    height: 100%;
+    padding: 3rem 0;
+    background-color: var(--bg-input-normal);
+    border-radius: .8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    @media screen and (min-width:960px) {
+        padding: 0 3rem;
+        margin: 0 3rem;
+        flex-direction: row;
+    }
+
+    img {
+        width: 350px;
+    }
+
+    h4 {
+        text-align: center;
+    }
+}

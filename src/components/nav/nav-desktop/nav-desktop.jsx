@@ -9,9 +9,9 @@ export default function NavDesktop() {
     const navigate = useNavigate();
 
     const handleLogout = async (e) => {
-        e.preventDefault(); // empêche NavLink de naviguer tout de suite
-        await fetchLogout(); // exécute ton logout
-        navigate("/"); // redirige manuellement
+        e.preventDefault(); 
+        await fetchLogout(); 
+        navigate("/");
     };
 
     return (

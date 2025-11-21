@@ -6,7 +6,6 @@ import { useNavigate } from "react-router";
 import useQuestions from "../../../hooks/useQuestions.js";
 
 export default function ConfigGameForm() {
-    // todo: connexion db
     // Connexion avec game pour stocker la partie et les questions
     const [gameConfig, setGameConfig] = useAtom(gameConfigAtom);
     const [activeDifficulty, setActiveDifficulty] = useState("");
@@ -56,8 +55,6 @@ export default function ConfigGameForm() {
 
         try {
             setGameConfig(data);
-            // Todo: connexion db
-            // await fetchCreateGames(data);
             navigate("/quiz");
 
             return {

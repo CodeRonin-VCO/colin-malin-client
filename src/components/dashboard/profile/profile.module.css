@@ -1,0 +1,127 @@
+.profile {
+    height: 100%;
+    padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media screen and (min-width:960px) {
+        padding: 0 3rem;
+        margin: 0 3rem;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr 2.5fr .5fr;
+    }
+}
+
+.info_card {
+    padding: 1.5rem;
+    text-align: center;
+    background-color: var(--secondary20-normal);
+    border-radius: .8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h6 {
+        font-size: clamp(1.2rem, 1.4rem + 0.5vw, 1.8rem);
+    }
+
+    p {
+        font-size: clamp(1rem, 1.1rem + 0.3vw, 1.4rem);
+    }
+}
+
+.input {
+    width: 100%;
+    margin: .8rem auto;
+    padding: .3rem .6rem;
+    color: var(--text-normal);
+    text-align: center;
+    background-color: var(--solid50-normal);
+    border-radius: 3.2rem;
+    border: none;
+    outline: none;
+    resize: vertical;
+}
+
+.btn_container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn_control {
+    margin-top: 1rem;
+    padding: .3rem 2rem;
+    color: var(--text-normal);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-radius: .8rem;
+    cursor: pointer;
+    transition: .3s all ease-out;
+
+    &:first-child {
+        color: var(--warning-normal);
+    }
+
+    &:last-child {
+        color: var(--success-normal);
+    }
+
+    &:hover {
+        scale: 1.5;
+    }
+}
+
+.description {
+    grid-column: span 3;
+    background-color: var(--bg-input-normal);
+}
+
+.empty_design {
+    padding: 1.5rem;
+    color: var(--warning-normal);
+    text-align: center;
+    background: linear-gradient(0deg, rgba(10, 105, 133, 1) 0%, rgba(41, 26, 63, 1) 100%);
+    border-radius: .8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile_empty {
+    max-width: 500px;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: center;
+    background: var(--bg-input-normal);
+    border-radius: .8rem;
+}
+
+.btn_update {
+    width: 50%;
+    margin: auto;
+    padding: 1.5rem;
+    color: var(--text-normal);
+    text-align: center;
+    background-color: var(--solid50-normal);
+    border: none;
+    border-radius: .8rem;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: .3s all ease-out;
+
+    @media screen and (min-width:960px) {
+        width: 100%;
+        margin: 0;
+    }
+
+    &:hover {
+        background-color: var(--solid60-normal);
+        transform: translateY(-2px);
+    }
+}

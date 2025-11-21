@@ -49,7 +49,7 @@ export default function LoginForm({ setSwitchForm }) {
 
     return (
         <form action={handleForm} className={styles.form}>
-            <h4 className={styles.title}>Log in to your account</h4>
+            <h4 className={styles.title}>Connecte-toi à ton compte</h4>
             <div className={styles.input_group}>
                 <label htmlFor="email">
                     <span>Email</span>
@@ -59,7 +59,7 @@ export default function LoginForm({ setSwitchForm }) {
             </div>
             <div className={styles.input_group}>
                 <label htmlFor="password">
-                    <span>Password</span>
+                    <span>Mot de passe</span>
                     {state.errors?.password && (<span className={styles.required}>{state.errors.password}</span>)}
                 </label>
                 <input type="password" id="password" name="password" />
@@ -71,7 +71,7 @@ export default function LoginForm({ setSwitchForm }) {
             <button className={styles.btn_submit} type="submit" disabled={isPending}>{isPending ? "Logging in..." : "Log in"}</button>
 
             <div className={styles.register_link}>
-                <p>Don't have an account ?</p>
+                <p>Pas encore de compte ?</p>
                 <button type="button" className={styles.btn_switch} onClick={() => setSwitchForm(false)}>Sign up</button>
             </div>
         </form>

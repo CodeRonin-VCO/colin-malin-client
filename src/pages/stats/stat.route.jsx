@@ -8,6 +8,8 @@ import { ImProfile } from "react-icons/im";
 import { FaGears } from "react-icons/fa6";
 import { useState } from "react";
 import OverviewDashboard from "../../components/dashboard/overview/overview.jsx";
+import ProfileDashboard from "../../components/dashboard/profile/profile.jsx";
+import PreferencesDashboard from "../../components/dashboard/preferences/preferences.jsx";
 
 export default function StatPage() {
     const [user] = useAtom(userAtom);
@@ -38,6 +40,8 @@ export default function StatPage() {
                 </div>
                 <div className={styles.dash_tiles}>
                     {isSelected === "overview" && (<OverviewDashboard />)}
+                    {isSelected === "profile" && (<ProfileDashboard />)}
+                    {isSelected === "preferences" && (<PreferencesDashboard />)}
                 </div>
             </main>
             <FooterLayout />

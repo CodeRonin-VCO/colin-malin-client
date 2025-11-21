@@ -4,6 +4,13 @@
     margin: auto;
     width: 90%;
     display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media screen and (min-width:960px) {
+        flex-direction: row;
+        gap: 0;
+    }
 }
 
 .sidebar {
@@ -63,4 +70,9 @@
 .isSelected {
     background-color: var(--secondary20-normal);
     border-radius: 3.2rem;
+}
+
+.dash_tiles {
+    width: 100%;
+    position: relative;
 }

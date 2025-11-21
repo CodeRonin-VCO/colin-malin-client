@@ -1,18 +1,15 @@
 import { useAtom } from "jotai";
 import styles from "./solo.module.css";
-import { questionsAtom, userAtom } from "../../../atom/atom.js";
-import { useEffect, useRef, useState } from "react";
+import { questionsAtom } from "../../../atom/atom.js";
+import { useEffect, useMemo, useRef, useState } from "react";
 import useQuestions from "./../../../hooks/useQuestions.js";
 import { GiCheckMark, GiCrossMark } from "react-icons/gi";
-import { useNavigate } from "react-router";
-import { THEME_MAP, translateValue } from "../../../utils/translate-mapping.js";
 import QuizResultsPopup from "../../modal/popup-quizResults/popup-quizResults.jsx";
+import { shuffleArray } from "../../../utils/shuffleArray.js";
 
 export default function SoloGame() {
-    const [user, setUser] = useAtom(userAtom);
     const [questions, setQuestions] = useAtom(questionsAtom);
     const { fetchFiltered } = useQuestions();
-    const navigate = useNavigate();
 
     // Question en cours
     const [questionCount, setQuestionCount] = useState(0);
@@ -61,8 +58,13 @@ export default function SoloGame() {
         fetchFiltered();
     }, []);
 
+    // Shuffle answers
+    const shuffledAnswers = useMemo(() => {
+        if (!currentQuestion) return [];
+        return shuffleArray(currentQuestion.answers);
+    }, [currentQuestion]);
 
-    function handleAnswerClick(answer) {
+    async function handleAnswerClick(answer) {
         if (selectedAnswer === null) {
             setSelectedAnswer(answer);
             setIsCorrect(answer === currentQuestion.correct_answer);
@@ -71,12 +73,13 @@ export default function SoloGame() {
             setAnswersLog(prev => [
                 ...prev,
                 {
-                    id: currentQuestion.id,
+                    question_id: currentQuestion.question_id,
                     question: currentQuestion.question,
                     theme: currentQuestion.theme,
-                    correct: currentQuestion.correct_answer,
-                    given: answer,
-                    isCorrect: answer === currentQuestion.correct_answer,
+                    difficulty: currentQuestion.difficulty,
+                    correct_answer: currentQuestion.correct_answer,
+                    user_answer: answer,
+                    is_correct: answer === currentQuestion.correct_answer,
                 }
             ]);
         }
@@ -92,11 +95,6 @@ export default function SoloGame() {
             setShowPopup(true);
         }
     }
-
-    function getScore() {
-        return answersLog.filter(a => a.isCorrect).length;
-    }
-
 
     return (
         <div className={styles.solo_game}>
@@ -121,7 +119,7 @@ export default function SoloGame() {
                         <div className={styles.theme}>{currentQuestion.theme}</div>
                         <h4>{currentQuestion.question}</h4>
                         <div className={styles.container_answers}>
-                            {currentQuestion.answers.map((a, i) => (
+                            {shuffledAnswers.map((a, i) => (
                                 <button
                                     key={i}
                                     onClick={timer === 0 ? undefined : () => handleAnswerClick(a)}
@@ -179,7 +177,6 @@ export default function SoloGame() {
 
             {showPopup && (
                 <QuizResultsPopup
-                    getScore={getScore}
                     answersLog={answersLog}
                     questions={questions}
                 />

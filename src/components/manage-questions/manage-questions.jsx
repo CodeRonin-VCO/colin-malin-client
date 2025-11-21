@@ -19,8 +19,6 @@ export default function ManageQuestionsAdmin() {
     const [kebabMenuOpen, setKebabMenuOpen] = useState(null);
     const [updateFormOpen, setUpdateFormOpen] = useState(null);
 
-
-    // Todo: faire la logique de connexion à la db (get, put, delete)
     useEffect(() => {
         fetchGetAll(offset, limit);
     }, [offset, limit, refreshTrigger]);

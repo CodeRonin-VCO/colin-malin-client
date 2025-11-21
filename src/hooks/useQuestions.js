@@ -1,14 +1,18 @@
 import { useAtom } from "jotai";
 import * as questionsService from "./../services/questions.service.js";
-import { gameConfigAtom, questionsAtom, tokenAtom } from "../atom/atom.js";
+import { gameConfigAtom, questionsAtom, tokenAtom, userAtom } from "../atom/atom.js";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { handleExpiredToken } from "../utils/expiredToken.js";
 
 export default function useQuestions() {
     const [token, setToken] = useAtom(tokenAtom);
+    const [user, setUser] = useAtom(userAtom);
     const [gameConfig, setGameConfig] = useAtom(gameConfigAtom);
     const [questions, setQuestions] = useAtom(questionsAtom);
     const [hasMore, setHasMore] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const fetchGetAll = async (offset, limit) => {
         setIsLoading(true);
@@ -21,8 +25,9 @@ export default function useQuestions() {
             return { success: true, response };
 
         } catch (error) {
-            console.error("Erreur lors de la récupération des questions :", error);
-            throw error;
+            const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
+            if (!isTokenExpired) throw error;
+            
         } finally {
             setIsLoading(false);
         }
@@ -38,8 +43,9 @@ export default function useQuestions() {
             return { success: true, response };
 
         } catch (error) {
-            console.error("Erreur lors de la récupération des questions :", error);
-            throw error;
+           const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
+            if (!isTokenExpired) throw error;
+            
         } finally {
             setIsLoading(false);
         }
@@ -52,20 +58,23 @@ export default function useQuestions() {
             return { success: true, response };
 
         } catch (error) {
-            throw error;
+            const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
+            if (!isTokenExpired) throw error;
+            
         }
     };
 
     const fetchFiltered = async () => {
         try {
             const response = await questionsService.filtered(token, gameConfig);
-            console.log("Appel à fetchFiltered avec config :", gameConfig);
             setQuestions(response.questions);
 
             return { success: true, response };
 
         } catch (error) {
-            throw error;
+            const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
+            if (!isTokenExpired) throw error;
+            
         }
     };
 
@@ -76,7 +85,9 @@ export default function useQuestions() {
             return { success: true, response };
 
         } catch (error) {
-            throw error;
+            const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
+            if (!isTokenExpired) throw error;
+            
         }
     };
     const fetchModify = async (question_id, updatedData) => {
@@ -86,7 +97,9 @@ export default function useQuestions() {
             return { success: true, response };
 
         } catch (error) {
-            throw error;
+            const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
+            if (!isTokenExpired) throw error;
+            
         }
     };
     const fetchDelete = async (question_id) => {
@@ -96,7 +109,9 @@ export default function useQuestions() {
             return { success: true, response };
 
         } catch (error) {
-            throw error;
+            const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
+            if (!isTokenExpired) throw error;
+            
         }
     };
 

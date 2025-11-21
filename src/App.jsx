@@ -7,6 +7,7 @@ import QuizConfigPage from "./pages/quiz-config/quiz-config.route.jsx";
 import QuizPage from "./pages/quiz/quiz.jsx";
 import StatPage from "./pages/stats/stat.route.jsx";
 import AdminPage from "./pages/admin/admin.route.jsx";
+import ProtectedRoute from "./components/protectedRoute/protectedRoute.jsx";
 
 function App() {
 
@@ -14,17 +15,44 @@ function App() {
         <>
             <Routes>
                 <Route index element={<HomeRoute />} />
-                <Route path="/getStarted" element={<GetStartedPage />} />
-                <Route path="/quiz-config" element={<QuizConfigPage />} />
-                <Route path="/quiz" element={<QuizPage />} />
-                <Route path="/stat" element={<StatPage />} />
-                <Route path="/admin" element={<AdminPage />} />
+                <Route
+                    path="/getStarted"
+                    element={
+                        <ProtectedRoute>
+                            <GetStartedPage />
+                        </ProtectedRoute>
+                    } />
+                <Route
+                    path="/quiz-config"
+                    element={
+                        <ProtectedRoute>
+                            <QuizConfigPage />
+                        </ProtectedRoute>
+                    } />
+                <Route
+                    path="/quiz"
+                    element={
+                        <ProtectedRoute>
+                            <QuizPage />
+                        </ProtectedRoute>
+                    } />
+                <Route
+                    path="/stat"
+                    element={
+                        <ProtectedRoute>
+                            <StatPage />
+                        </ProtectedRoute>
+                    } />
+                <Route
+                    path="/admin"
+                    element={
+                        <ProtectedRoute>
+                            <AdminPage />
+                        </ProtectedRoute>
+                    } />
             </Routes>
         </>
     )
 }
 
 export default App;
-
-
-// TODO : Gérer l'expiration du token et l'expulsion vers la page d'accueil

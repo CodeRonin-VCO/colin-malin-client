@@ -33,3 +33,18 @@ export const login = async (email, password) => {
 export const logOut = async () => {
     return Promise.resolve();
 };
+
+export const updatePassword = async (email, oldPassword, newPassword) => {
+    const response = await fetch(`${baseURL}/update-pwd`, {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, oldPassword, newPassword })
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Updating password failed.");
+    };
+
+    return response.json();
+}

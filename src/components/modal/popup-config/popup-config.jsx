@@ -4,17 +4,18 @@ import styles from "./popup-config.module.css";
 
 export default function ConfigPopup({ gameConfig, setGamehasStarted }) {
     const navigate = useNavigate();
+    const isGameConfigEmpty = !gameConfig || !gameConfig.nb_questions || !gameConfig.difficulty || !gameConfig.mode;
 
     return (
         <div className={styles.popup}>
             <div className={styles.color_bar}></div>
-            {gameConfig === null && (
+            {isGameConfigEmpty && (
                 <div className={styles.nogame}>
                     <p>Veuillez paramétrer une partie pour jouer.</p>
                     <button className={styles.btn_play} onClick={() => navigate("/quiz-config")}>Configurer une partie</button>
                 </div>
             )}
-            {gameConfig && (
+            {!isGameConfigEmpty && (
                 <>
                     
                     <h3>Valider le choix <span className={styles.title_color}>de partie ?</span></h3>
@@ -33,7 +34,7 @@ export default function ConfigPopup({ gameConfig, setGamehasStarted }) {
                         <div className={styles.container_theme}>
                             <span>Thèmes</span>
                             <span>
-                                {gameConfig.theme.map((th, index) => (
+                                {gameConfig?.theme?.map((th, index) => (
                                     <span key={index} className={styles.theme}>{translateValue(th, THEME_MAP)}</span>
                                 ))}
                             </span>

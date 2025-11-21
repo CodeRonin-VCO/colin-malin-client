@@ -37,7 +37,6 @@ export default function RegisterForm({ setSwitchForm }) {
             }
         };
 
-        // todo: Connection with DB
         try {
             await fetchRegister(data.username, data.email, data.password);
             navigate("/getStarted");
@@ -64,10 +63,10 @@ export default function RegisterForm({ setSwitchForm }) {
 
     return (
         <form action={handleForm} className={styles.form}>
-            <h4 className={styles.title}>Create an account</h4>
+            <h4 className={styles.title}>Crée un compte</h4>
             <div className={styles.input_group}>
                 <label htmlFor="username">
-                    <span>Username</span>
+                    <span>Nom d'utilisateur</span>
                     {state.errors?.username && (<span className={styles.required}>{state.errors.username}</span>)}
 
                 </label>
@@ -82,14 +81,14 @@ export default function RegisterForm({ setSwitchForm }) {
             </div>
             <div className={styles.input_group}>
                 <label htmlFor="password">
-                    <span>Password</span>
+                    <span>Mot de passe</span>
                     {state.errors?.password && (<span className={styles.required}>{state.errors.password}</span>)}
                 </label>
                 <input type="password" id="password" name="password" />
             </div>
             <div className={styles.input_group}>
                 <label htmlFor="confirmPassword">
-                    <span>Confirm password</span>
+                    <span>Confirme le mot de passe</span>
                     {state.errors?.confirmPassword && (<span className={styles.required}>{state.errors.confirmPassword}</span>)}
                 </label>
                 <input type="password" id="confirmPassword" name="confirmPassword" />
@@ -101,7 +100,7 @@ export default function RegisterForm({ setSwitchForm }) {
             )} */}
 
             <div className={styles.register_link}>
-                <p>Already have an account ?</p>
+                <p>Déjà un compte ?</p>
                 <button type="button" className={styles.btn_switch} onClick={() => setSwitchForm(true)}>Sign in</button>
             </div>
         </form>
