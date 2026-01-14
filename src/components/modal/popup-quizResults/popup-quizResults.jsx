@@ -40,6 +40,7 @@ export default function QuizResultsPopup({ answersLog, questions }) {
                 setGameConfig(prev => ({ ...prev, gameId }));
             }
 
+            // todo: ajouter le temps des réponses
             await fetchAddResults(
                 gameId,
                 getScore(),
