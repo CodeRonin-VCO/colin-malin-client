@@ -5,14 +5,14 @@ import { useState } from "react";
 import { LuSave } from "react-icons/lu";
 import { MdCancelPresentation } from "react-icons/md";
 import useAuth from "../../../hooks/useAuth.js";
-import Toast from "../../modal/toast-delete/toast-delete.jsx";
+import Toast from "../../modal/toast/toast.jsx";
 import useUser from "../../../hooks/useUser.js";
 
 
 export default function ProfileDashboard() {
     const [user, setUser] = useAtom(userAtom);
     const { fetchUpdatePassword } = useAuth();
-    const {fetchUpdateUser } = useUser();
+    const { fetchUpdateUser } = useUser();
     const [editingField, setEditingField] = useState(null);
     const [updateField, setUpdateField] = useState({
         username: user.username,

@@ -65,9 +65,9 @@ export default function LoginForm({ setSwitchForm }) {
                 <input type="password" id="password" name="password" />
             </div>
 
-            {/* {state.message && (
+            {state.message && (
                 <p className={state.success ? styles.success_msg : styles.error_msg}>{state.message}</p>
-            )} */}
+            )}
             <button className={styles.btn_submit} type="submit" disabled={isPending}>{isPending ? "Logging in..." : "Log in"}</button>
 
             <div className={styles.register_link}>

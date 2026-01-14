@@ -4,7 +4,7 @@ import { DIFFICULTY_MAP, THEME_MAP, translateValue } from "../../utils/translate
 import styles from "./manage-questions.module.css";
 import { useAtom } from "jotai";
 import { questionsAtom } from "../../atom/atom.js";
-import Toast from "../modal/toast-delete/toast-delete.jsx";
+import Toast from "../modal/toast/toast.jsx";
 import { CiMenuKebab } from "react-icons/ci";
 import UpdateQuestionsForm from "../forms/update-questions/update-questions.jsx";
 import SearchBar from "../searchBar/searchBar.jsx";

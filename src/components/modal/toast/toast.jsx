@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import styles from './toast-delete.module.css';
+import { useEffect } from 'react';
+import styles from './toast.module.css';
 
 /**
  * Composant Toast pour afficher des notifications temporaires.

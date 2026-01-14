@@ -27,7 +27,7 @@ export default function QuizResultsPopup({ answersLog, questions }) {
                     question_id: q.question_id,
                     user_answer: answersLog.find(a => a.question_id === q.question_id)?.user_answer || null,
                 }));
-
+                
                 const response = await fetchCreateGame(
                     nbToSend,
                     gameConfig.theme,
