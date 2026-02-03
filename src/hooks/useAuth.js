@@ -3,7 +3,7 @@ import { useAtom } from "jotai";
 import * as authService from "./../services/auth.service.js";
 import * as userService from "./../services/user.service.js";
 import { tokenAtom, userAtom } from "../atom/atom.js";
-import useUser from "./useUser.js";
+
 
 export default function useAuth() {
     const [token, setToken] = useAtom(tokenAtom);

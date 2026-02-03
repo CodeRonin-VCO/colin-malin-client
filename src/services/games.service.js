@@ -1,44 +1,18 @@
-const baseURL = "http://localhost:8008/api/games";
+import { fetchJson } from "./apiClient.js";
 
-export const getGames = async (token) => {
-    const response = await fetch(`${baseURL}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-    });
 
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Echec de la récupération de la partie.");
-    };
+export const getGames = (token) => fetchJson("/games", {
+    method: "GET",
+    token,
+});
 
-    return response.json();
-};
+export const createGame = (token, user_id, nb_questions, theme, difficulty, mode, questions) => fetchJson("/games", {
+    method: "POST",
+    token,
+    body: { user_id, nb_questions, theme, difficulty, mode, questions }
+});
 
-export const createGame = async (token, user_id, nb_questions, theme, difficulty, mode, questions) => {
-    const response = await fetch(`${baseURL}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ user_id, nb_questions, theme, difficulty, mode, questions })
-    });
-
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Echec de la création de la partie.");
-    };
-
-    return response.json();
-};
-
-export const getGameById = async (token, game_id) => {
-    const response = await fetch(`${baseURL}/${game_id}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-    });
-
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Echec de la récupération de la partie.");
-    };
-
-    return response.json();
-};
+export const getGameById = (token, game_id) => fetchJson(`/games/${game_id}`, {
+    method: "GET",
+    token
+});

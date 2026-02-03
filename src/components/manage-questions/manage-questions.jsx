@@ -34,7 +34,6 @@ export default function ManageQuestionsAdmin() {
 
     async function deleteQuestion(question_id) {
         if (!question_id) return;
-        console.log("question_id dans deleteQuestion", question_id);
 
         const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer cette question ?");
         if (!isConfirmed) return;

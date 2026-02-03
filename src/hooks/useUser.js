@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 
 export default function useUser() {
     const [token, setToken] = useAtom(tokenAtom);
-    const [setUser] = useAtom(userAtom);
+    const [user, setUser] = useAtom(userAtom);
     const navigate = useNavigate();
 
     const fetchUpdateUser = async (updates) => {

@@ -1,50 +1,19 @@
-const baseURL = "http://localhost:8008/api/auth";
+import { fetchJson } from "./apiClient.js";
 
-export const register = async (username, email, password) => {
-    const response = await fetch(`${baseURL}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password })
-    });
 
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Registration failed.");
-    };
+export const register = (username, email, password) => fetchJson("/auth/register", {
+    method: "POST", body: { username, email, password }
+});
 
-    return response.json();
-};
+export const login = (email, password) => fetchJson("/auth/login", {
+    method: "POST", body: { email, password }
+});
 
-export const login = async (email, password) => {
-    const response = await fetch(`${baseURL}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-    });
-
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Connection failed.");
-    };
-
-    return response.json();
-};
+export const updatePassword = (email, oldPassword, newPassword) => fetchJson("/auth/update-pwd", {
+    method: "PUT", body: { email, oldPassword, newPassword }
+});
 
 export const logOut = async () => {
     return Promise.resolve();
 };
 
-export const updatePassword = async (email, oldPassword, newPassword) => {
-    const response = await fetch(`${baseURL}/update-pwd`, {
-        method: "put",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, oldPassword, newPassword })
-    });
-
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Updating password failed.");
-    };
-
-    return response.json();
-}
