@@ -2,6 +2,7 @@ import { useActionState } from "react";
 import useAuth from "../../../hooks/useAuth.js";
 import styles from "./login.module.css";
 import { useNavigate } from "react-router";
+import Button from "../../ui/buttons/buttons.jsx";
 
 
 export default function LoginForm({ setSwitchForm }) {
@@ -68,11 +69,16 @@ export default function LoginForm({ setSwitchForm }) {
             {state.message && (
                 <p className={state.success ? styles.success_msg : styles.error_msg}>{state.message}</p>
             )}
-            <button className={styles.btn_submit} type="submit" disabled={isPending}>{isPending ? "Logging in..." : "Log in"}</button>
+
+            <Button type="submit" variant={"btn_submit"} disabled={isPending}>
+                {isPending ? "Logging in..." : "Log in"}
+            </Button>
 
             <div className={styles.register_link}>
                 <p>Pas encore de compte ?</p>
-                <button type="button" className={styles.btn_switch} onClick={() => setSwitchForm(false)}>Sign up</button>
+                <Button type="button" variant={"btn_switch"} onClick={() => setSwitchForm(false)}>
+                    Sign up
+                </Button>
             </div>
         </form>
     )

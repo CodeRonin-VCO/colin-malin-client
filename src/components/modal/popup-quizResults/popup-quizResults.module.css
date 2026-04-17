@@ -152,27 +152,6 @@
     }
 }
 
-.btn {
-    margin: 3.2rem 0;
-    padding: 1.6rem 3.2rem;
-    color: var(--text-inverted-normal);
-    font-weight: bold;
-    background: linear-gradient(120deg, var(--primary-normal), var(--solid-normal));
-    border: none;
-    border-radius: 1.6rem;
-    align-self: center;
-    transition: .3s all ease-out;
-    cursor: pointer;
-
-    &:hover {
-        color: var(--text-light);
-        background-color: var(--primary-normal);
-        border: none;
-        box-shadow: 0 20px 80px -10px var(--primary-normal);
-        transform: translate(0, -3px);
-    }
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;

@@ -3,14 +3,13 @@ import styles from "./config-game.module.css";
 import { useAtom } from "jotai";
 import { gameConfigAtom } from "../../../atom/atom.js";
 import { useNavigate } from "react-router";
-import useQuestions from "../../../hooks/useQuestions.js";
+import Button from "../../ui/buttons/buttons.jsx";
 
 export default function ConfigGameForm() {
     // Connexion avec game pour stocker la partie et les questions
-    const [gameConfig, setGameConfig] = useAtom(gameConfigAtom);
+    const [, setGameConfig] = useAtom(gameConfigAtom);
     const [activeDifficulty, setActiveDifficulty] = useState("");
     const [activeTheme, setActiveTheme] = useState([]);
-    const [activeType, setActiveType] = useState("");
     const navigate = useNavigate();
 
     function handleTheme(targetId) {
@@ -37,14 +36,13 @@ export default function ConfigGameForm() {
             nb_questions: parseInt(formData.get("nb_questions")),
             theme: formData.getAll("theme"),
             difficulty: formData.get("difficulty"),
-            mode: formData.get("mode")
+            mode: "solo"
         };
 
         const errors = {};
         if (!data.nb_questions) errors.nb_questions = "Champ obligatoire";
         if (!data.theme || data.theme.length === 0) errors.theme = "Champ obligatoire";
         if (!data.difficulty) errors.difficulty = "Champ obligatoire";
-        if (!data.mode) errors.mode = "Champ obligatoire";
         if (Object.keys(errors).length > 0) {
             return {
                 data: null,
@@ -53,23 +51,14 @@ export default function ConfigGameForm() {
             }
         };
 
-        try {
-            setGameConfig(data);
-            navigate("/quiz");
+        setGameConfig(data);
+        navigate("/quiz");
 
-            return {
-                data,
-                errors: {},
-                message: "Partie configurée."
-            }
-
-        } catch (error) {
-            return {
-                data: null,
-                errors: {},
-                message: error.message || "Echec dans la configuration de la partie."
-            };
-        };
+        return {
+            data,
+            errors: {},
+            message: "Partie configurée."
+        }
     }
 
     const initialData = { data: null, errors: {}, message: null };
@@ -121,6 +110,10 @@ export default function ConfigGameForm() {
                     <input type="checkbox" name="theme" id="sciences" value="sciences" checked={activeTheme.includes("sciences")} onChange={(e) => handleTheme(e.target.id)} />
                     Sciences
                 </label>
+                <label htmlFor="technology" className={`${styles.technology} ${activeTheme.includes("technology") ? styles.active : ""}`}>
+                    <input type="checkbox" name="theme" id="technology" value="technology" checked={activeTheme.includes("technology")} onChange={(e) => handleTheme(e.target.id)} />
+                    Technologies
+                </label>
                 <label htmlFor="culture" className={`${styles.culture} ${activeTheme.includes("culture") ? styles.active : ""}`}>
                     <input type="checkbox" name="theme" id="culture" value="culture" checked={activeTheme.includes("culture")} onChange={(e) => handleTheme(e.target.id)} />
                     Culture
@@ -143,22 +136,9 @@ export default function ConfigGameForm() {
                 </label>
             </div>
 
-            <div className={`${styles.input_group} ${styles.types}`}>
-                <h4 className={styles.title}>
-                    Type de partie
-                    {state.errors?.mode && (<span className={styles.required}>{state.errors.mode}</span>)}
-                </h4>
-                <label htmlFor="solo" className={`${styles.solo} ${activeType === "solo" ? styles.active : ""}`}>
-                    <input type="radio" id="solo" name="mode" value="solo" checked={activeType === "solo"} onChange={(e) => setActiveType(e.target.id)} />
-                    Solo
-                </label>
-                <label htmlFor="multi" className={`${styles.multi} ${activeType === "multi" ? styles.active : ""}`}>
-                    <input type="radio" id="multi" name="mode" value="multi" checked={activeType === "multi"} onChange={(e) => setActiveType(e.target.id)} />
-                    Multijoueur
-                </label>
-            </div>
-
-            <button className={styles.btn_submit} type="submit">Configurer la partie</button>
+            <Button type="submit" variant={"btn_submit"} disabled={isPending}>
+                Configurer la partie
+            </Button>
         </form>
     )
 }

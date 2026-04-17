@@ -7,7 +7,7 @@ const THEME_MAP = {
     sport: "Sport",
     geography: "Géographie",
     sociology: "Sociologie",
-    anecdotes: "Anecdotes",
+    technology: "Technologie",
     mix: "Tous les thèmes",
 };
 

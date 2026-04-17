@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import { DIFFICULTY_MAP, THEME_MAP, translateValue, TYPE_MAP } from "../../../utils/translate-mapping.js";
 import styles from "./popup-config.module.css";
+import Button from "../../ui/buttons/buttons.jsx";
 
 export default function ConfigPopup({ gameConfig, setGamehasStarted }) {
     const navigate = useNavigate();
@@ -12,12 +13,18 @@ export default function ConfigPopup({ gameConfig, setGamehasStarted }) {
             {isGameConfigEmpty && (
                 <div className={styles.nogame}>
                     <p>Veuillez paramétrer une partie pour jouer.</p>
-                    <button className={styles.btn_play} onClick={() => navigate("/quiz-config")}>Configurer une partie</button>
+                    <Button
+                        type="button"
+                        onClick={() => navigate("/quiz-config")}
+                        variant={"btn_play"}
+                    >
+                        Configurer une partie
+                    </Button>
                 </div>
             )}
             {!isGameConfigEmpty && (
                 <>
-                    
+
                     <h3>Valider le choix <span className={styles.title_color}>de partie ?</span></h3>
 
                     <div className={styles.container_grid}>
@@ -46,8 +53,20 @@ export default function ConfigPopup({ gameConfig, setGamehasStarted }) {
                         </div>
                     </div>
                     <div className={styles.container_btn}>
-                        <button onClick={() => navigate("/quiz-config")}>Retour</button>
-                        <button className={styles.btn_play} onClick={() => setGamehasStarted(true)}>Jouer</button>
+                        <Button
+                            type="button"
+                            onClick={() => navigate("/quiz-config")}
+                            variant={"btn_back_popup"}
+                        >
+                            Retour
+                        </Button>
+                        <Button
+                            type="button"
+                            onClick={() => setGamehasStarted(true)}
+                            variant={"btn_play"}
+                        >
+                            Jouer
+                        </Button>
                     </div>
                 </>
             )}

@@ -1,6 +1,7 @@
 import { useActionState, useRef } from "react";
 import styles from "./add-questions.module.css";
 import useQuestions from "../../../hooks/useQuestions.js";
+import Button from "../../ui/buttons/buttons.jsx";
 
 export default function AddQuestionsForm() {
     const { fetchCreate } = useQuestions();
@@ -72,6 +73,7 @@ export default function AddQuestionsForm() {
                     <option value="history">Histoire</option>
                     <option value="sport">Sport</option>
                     <option value="sociology">Sociologie</option>
+                    <option value="technology">Technologies</option>
                 </select>
             </div>
             <div className={styles.input_group}>
@@ -97,7 +99,11 @@ export default function AddQuestionsForm() {
                     <option value="high">Elevée</option>
                 </select>
             </div>
-            <button type="submit" className={styles.btn_submit}>{isPending ? "Validation en cours" : "Valider"}</button>
+
+            <Button type="submit" variant={"btn_submit"} disabled={isPending}>
+                {isPending ? "Validation en cours" : "Valider"}
+            </Button>
+
             {state.message && (
                 <p className={state.success ? styles.success_msg : styles.error_msg}>{state.message}</p>
             )}

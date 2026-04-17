@@ -7,6 +7,7 @@ import { MdCancelPresentation } from "react-icons/md";
 import useAuth from "../../../hooks/useAuth.js";
 import Toast from "../../modal/toast/toast.jsx";
 import useUser from "../../../hooks/useUser.js";
+import Button from "../../ui/buttons/buttons.jsx";
 
 
 export default function ProfileDashboard() {
@@ -36,7 +37,7 @@ export default function ProfileDashboard() {
             setNewPassword("");
         } catch (error) {
             setToast({ message: "Erreur dans la mise à jour du mot de passe", type: "error" });
-            console.error(error.message);
+            console.error("Erreur mise à jour mot de passe :", error);
         };
     };
 
@@ -56,7 +57,7 @@ export default function ProfileDashboard() {
 
         } catch (error) {
             setToast({ message: `Erreur dans la mise à jour de ${field}`, type: "error" });
-            console.error(error.message);
+            console.error("Erreur mise à jour profil :", error);
         };
     };
 
@@ -74,8 +75,12 @@ export default function ProfileDashboard() {
                             className={styles.input}
                         />
                         <div className={styles.btn_container}>
-                            <button className={styles.btn_control} onClick={() => setEditingField(null)} title="Annuler"><MdCancelPresentation /></button>
-                            <button className={styles.btn_control} title="Sauver" onClick={(e) => handleUpdates("username")}><LuSave /></button>
+                            <Button type="button" variant={"btn_control"} onClick={() => setEditingField(null)} title="Annuler" >
+                                <MdCancelPresentation />
+                            </Button>
+                            <Button type="button" variant={"btn_control"} onClick={() => handleUpdates("username")} title="Sauver">
+                                <LuSave />
+                            </Button>
                         </div>
                     </>
 
@@ -94,8 +99,12 @@ export default function ProfileDashboard() {
                             className={styles.input}
                         />
                         <div className={styles.btn_container}>
-                            <button className={styles.btn_control} onClick={() => setEditingField(null)} title="Annuler"><MdCancelPresentation /></button>
-                            <button className={styles.btn_control} title="Sauver" onClick={(e) => handleUpdates("email")}><LuSave /></button>
+                            <Button type="button" variant={"btn_control"} onClick={() => setEditingField(null)} title="Annuler" >
+                                <MdCancelPresentation />
+                            </Button>
+                            <Button type="button" variant={"btn_control"} onClick={() => handleUpdates("email")} title="Sauver">
+                                <LuSave />
+                            </Button>
                         </div>
                     </>
 
@@ -120,17 +129,21 @@ export default function ProfileDashboard() {
                             placeholder="Nouveau mdp"
                         />
                         <div className={styles.btn_container}>
-                            <button
-                                className={styles.btn_control}
+                            <Button
+                                type="button"
+                                variant={"btn_control"}
                                 onClick={() => {
                                     setOldPassword("");
                                     setNewPassword("");
                                     setEditingField(null)
                                 }}
-                                title="Annuler">
+                                title="Annuler"
+                            >
                                 <MdCancelPresentation />
-                            </button>
-                            <button className={styles.btn_control} title="Sauver" onClick={(e) => handleUpdatePassword()}><LuSave /></button>
+                            </Button>
+                            <Button type="button" variant={"btn_control"} onClick={() => handleUpdatePassword()} title="Sauver">
+                                <LuSave />
+                            </Button>
                         </div>
                     </>
 
@@ -151,12 +164,16 @@ export default function ProfileDashboard() {
                             id="description"
                             value={updateField.description}
                             onChange={(e) => handleFieldChange("description", e.target.value)}
-                            className={styles.input}
+                            className={`${styles.input} ${styles.textarea}`}
                             rows={5}
                         ></textarea>
                         <div className={styles.btn_container}>
-                            <button className={styles.btn_control} onClick={() => setEditingField(null)} title="Annuler"><MdCancelPresentation /></button>
-                            <button className={styles.btn_control} title="Sauver" onClick={(e) => handleUpdates("description")}><LuSave /></button>
+                            <Button type="button" variant={"btn_control"} onClick={() => setEditingField(null)} title="Annuler" >
+                                <MdCancelPresentation />
+                            </Button>
+                            <Button type="button" variant={"btn_control"} onClick={() => handleUpdates("description")} title="Sauver">
+                                <LuSave />
+                            </Button>
                         </div>
                     </>
 
@@ -167,18 +184,18 @@ export default function ProfileDashboard() {
             <div className={styles.empty_design}>
                 <p>Change tes informations personnelles sur cette page.</p>
             </div>
-            <button className={`${styles.btn_update}`} onClick={() => setEditingField("username")}>
+            <Button variant={"btn_update"} onClick={() => setEditingField("username")}>
                 Change ton nom d'utilisateur
-            </button>
-            <button className={`${styles.btn_update}`} onClick={() => setEditingField("email")}>
+            </Button>
+            <Button variant={"btn_update"} onClick={() => setEditingField("email")}>
                 Change ton email
-            </button>
-            <button className={`${styles.btn_update}`} onClick={() => setEditingField("password")}>
+            </Button>
+            <Button variant={"btn_update"} onClick={() => setEditingField("password")}>
                 Change ton mot de passe
-            </button>
-            <button className={`${styles.btn_update}`} onClick={() => setEditingField("description")}>
+            </Button>
+            <Button variant={"btn_update"} onClick={() => setEditingField("description")}>
                 Change ta description
-            </button>
+            </Button>
 
             {/* TOAST */}
             {toast && (<Toast message={toast.message} type={toast.type} onDismiss={() => setToast(null)} />)}

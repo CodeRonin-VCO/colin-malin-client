@@ -16,7 +16,7 @@ export default function SearchBar() {
             fetchGetAll(0, 20);
         }
 
-    }, [debouncedQuery]);
+    }, [debouncedQuery]); // eslint-disable-line react-hooks/exhaustive-deps
     
     return (
         <div className={styles.searchbar_container}>

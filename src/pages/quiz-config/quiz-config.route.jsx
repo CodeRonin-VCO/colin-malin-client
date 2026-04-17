@@ -12,7 +12,6 @@ export default function QuizConfigPage() {
             <main>
                 <div>
                     <h3 className={styles.title}>Paramètre ta partie</h3>
-                    <p></p>
                 </div>
                 <div>
                     <ConfigGameForm />

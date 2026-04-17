@@ -3,7 +3,7 @@ import useGames from "../../../hooks/useGames.js";
 import ProgressByDateChart from "../charts/byDateChart/byDateChart.jsx";
 import styles from "./overview.module.css";
 import useScores from "../../../hooks/useScores.js";
-import { DIFFICULTY_MAP, translateArray, translateValue } from "../../../utils/translate-mapping.js";
+import { DIFFICULTY_MAP, translateValue } from "../../../utils/translate-mapping.js";
 import ProgressByDifficultyChart from "../charts/byDifficulty/byDifficulty.jsx";
 import ProgressByThemeChart from "../charts/bytheme/bytheme.jsx";
 
@@ -15,6 +15,7 @@ export default function OverviewDashboard() {
     const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
     const [percentageResult, setPercentageResult] = useState(0);
     const [bestScore, setBestScore] = useState(null);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         const loadGames = async () => {
@@ -33,6 +34,7 @@ export default function OverviewDashboard() {
 
             } catch (error) {
                 console.error("Erreur lors du chargement des parties :", error);
+                setError(true);
             };
         };
 
@@ -45,14 +47,26 @@ export default function OverviewDashboard() {
 
             } catch (error) {
                 console.error("Erreur lors du chargement du meilleur score :", error);
+                setError(true);
             }
         }
 
         loadGames();
         loadScore();
 
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    // Erreur réseau
+    if (error) {
+        return (
+            <div className={styles.overview_empty}>
+                <h3>Impossible de charger vos statistiques</h3>
+                <p>Une erreur est survenue. Réessayez plus tard.</p>
+            </div>
+        );
+    }
+
+    // Erreur aucune stat
     if (totalCountGames === 0) {
         return (
             <div className={styles.overview_empty}>

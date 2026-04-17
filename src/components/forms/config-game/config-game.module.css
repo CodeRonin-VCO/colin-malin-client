@@ -114,8 +114,14 @@
         background-color: var(--solid-normal);
     }
 
+    .technology {
+        grid-area: 2 / 4 / 3 / 5;
+        color: var(--text-inverted-normal);
+        background-color: var(--primary-normal);
+    }
+
     .culture {
-        grid-area: 2 / 6 / 3 / 7;
+        grid-area: 2 / 5 / 3 / 7;
         background-color: var(--secondary-normal);
     }
 
@@ -142,46 +148,11 @@
     }
 }
 
-.types {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.6rem;
-
-    .title {
-        grid-area: 1 / 1 / 2 / 4;
-    }
-
-    .solo {
-        grid-area: 2 / 1 / 3 / 2;
-        background-color: var(--secondary-normal);
-    }
-
-    .multi {
-        grid-area: 2 / 2 / 3 / 3;
-        color: var(--text-inverted-normal);
-        background-color: var(--solid-normal);
-    }
-}
-
 .difficulty:has(.active) label:not(.active),
 .theme:has(.active) label:not(.active),
 .types:has(.active) label:not(.active) {
     opacity: 0.4;
     filter: blur(1px);
-}
-
-.btn_submit {
-    margin: 3.2rem 0;
-    padding: .8rem 3.2rem;
-    align-self: center;
-    background-color: var(--primary-normal);
-    border: none;
-    border-radius: 3.2rem;
-    transition: .3s all ease-out;
-
-    &:hover {
-        background-color: var(--primary-dark);
-    }
 }
 
 .required {
@@ -203,4 +174,3 @@
 .success_msg {
     color: var(--success-normal);
 }
-

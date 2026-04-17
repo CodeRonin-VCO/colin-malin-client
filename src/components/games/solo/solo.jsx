@@ -6,9 +6,10 @@ import useQuestions from "./../../../hooks/useQuestions.js";
 import { GiCheckMark, GiCrossMark } from "react-icons/gi";
 import QuizResultsPopup from "../../modal/popup-quizResults/popup-quizResults.jsx";
 import { shuffleArray } from "../../../utils/shuffleArray.js";
+import Button from "../../ui/buttons/buttons.jsx";
 
 export default function SoloGame() {
-    const [questions, setQuestions] = useAtom(questionsAtom);
+    const [questions] = useAtom(questionsAtom);
     const { fetchFiltered } = useQuestions();
 
     // Question en cours
@@ -31,7 +32,7 @@ export default function SoloGame() {
 
     useEffect(() => {
         // Init timer
-        setTimer(10);
+        setTimer(15);
 
         // Nettoie l'intervalle si présent
         if (timeRef.current) {
@@ -56,7 +57,7 @@ export default function SoloGame() {
 
     useEffect(() => {
         fetchFiltered();
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     // Shuffle answers
     const shuffledAnswers = useMemo(() => {
@@ -80,6 +81,7 @@ export default function SoloGame() {
                     correct_answer: currentQuestion.correct_answer,
                     user_answer: answer,
                     is_correct: answer === currentQuestion.correct_answer,
+                    time_spent: timer
                 }
             ]);
         }
@@ -120,18 +122,21 @@ export default function SoloGame() {
                         <h4>{currentQuestion.question}</h4>
                         <div className={styles.container_answers}>
                             {shuffledAnswers.map((a, i) => (
-                                <button
-                                    key={i}
+                                <Button
+                                    type="button"
                                     onClick={timer === 0 ? undefined : () => handleAnswerClick(a)}
-                                    className={selectedAnswer === a
+                                    variant={"btn_answer"}
+                                    state={selectedAnswer === a
                                         ? isCorrect
-                                            ? styles.correct
-                                            : styles.incorrect
+                                            ? "correct"
+                                            : "incorrect"
                                         : selectedAnswer === null && timer === 0
                                             ? a === currentQuestion.correct_answer
-                                                ? styles.correct
-                                                : styles.incorrect
-                                            : "inherit"}>
+                                                ? "correct"
+                                                : "incorrect"
+                                            : "inherit"}
+                                    key={i}
+                                >
                                     <span>{a}</span>
                                     <span>
                                         {selectedAnswer === a && (
@@ -157,14 +162,15 @@ export default function SoloGame() {
                                             )
                                         )}
                                     </span>
-                                </button>
+                                </Button>
                             ))}
                         </div>
                     </div>
 
-                    <button className={styles.btn_next} onClick={handleNextQuestion} disabled={isCorrect === null}>
+                    <Button type="button" onClick={handleNextQuestion} variant={"btn_next"} disabled={isCorrect === null}>
                         {questionCount === questions.length - 1 ? "Fin du quiz" : "Question suivante"}
-                    </button>
+                    </Button>
+
                     {isCorrect !== null && (
                         <p className={styles.feedback}>
                             {isCorrect ? "Bravo, c'est la bonne réponse ! 🎉" : `Incorrect. 😭 La bonne réponse était : ${currentQuestion.correct_answer}`}

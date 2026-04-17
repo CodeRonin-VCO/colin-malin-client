@@ -1,137 +1,182 @@
-# 🧠 Colin-Malin
+# 🧠 Colin-Malin — Frontend
 
 Colin-Malin est une application de quiz interactive construite avec React, Express et PostgreSQL, conçue pour offrir une expérience fluide, moderne et responsive. Elle propose une interface sombre élégante, une navigation mobile/desktop, et une gestion complète des utilisateurs et des statistiques.
 
+---
+
 ## Fonctionnalités
 
-- Authentification (inscription / connexion)
-- Configuration personnalisée du quiz (catégorie, difficulté, nombre de questions)
-- Quiz à choix multiples (4 réponses)
-- Statistiques détaillées après chaque session
-- Interface admin pour gérer les utilisateurs et les questions
+- Authentification (inscription / connexion / déconnexion)
+- Configuration personnalisée du quiz (thème, difficulté, nombre de questions)
+- Quiz à choix multiples (4 réponses) avec timer par question
+- Résultats détaillés après chaque session
+- Dashboard de statistiques (scores par thème, difficulté, évolution dans le temps)
+- Espace admin pour ajouter, modifier et supprimer des questions
+- Profil utilisateur (modification username, email, mot de passe, description)
 - Responsive design avec navigation mobile et desktop
 - Thème sombre avec palette personnalisée
 
+---
+
 ## Technologies
 
-- Frontend: React avec Vite
-    - State: Jotai
-    - Graphiques: chart.js
-    - Bundling: Vite
-- Backend: Node.js / Express.js
-- Base de données: PostgreSQL avec Sequelize
+| Catégorie | Technologie |
+|---|---|
+| Framework | React 19 avec Vite |
+| State management | Jotai |
+| Routing | React Router v7 |
+| Graphiques | Chart.js + react-chartjs-2 |
+| Styles | CSS Modules + SCSS |
+| Tests | Jest (ES Modules via `--experimental-vm-modules`) |
+| Icônes | react-icons |
+| Notifications | Composant Toast custom |
+
+---
+
+## Prérequis
+
+- Node.js 18+
+- Le backend Colin-Malin doit être lancé (voir README backend)
+
+---
+
+## Installation
+
+```bash
+# Cloner le projet
+git clone https://github.com/ton-repo/colin-malin-client.git
+cd colin-malin-client
+
+# Installer les dépendances
+npm install
+```
+
+---
+
+## Variables d'environnement
+
+Créer un fichier `.env` à la racine du projet :
+
+```env
+VITE_API_URL=http://localhost:8008/api
+```
+
+> ⚠️ Ne jamais committer le fichier `.env` — il est dans `.gitignore`
+
+---
+
+## Lancer le projet
+
+```bash
+# Développement
+npm run dev
+
+# Build production
+npm run build
+
+# Prévisualiser le build
+npm run preview
+
+# Linter
+npm run lint
+
+# Tests
+npm test
+
+# Tests en mode watch
+npm run test:watch
+```
+
+---
+
+## Tests
+
+Les tests couvrent les utilitaires et les services frontend avec Jest.
+
+```bash
+npm test
+```
+
+### Ce qui est testé
+
+| Fichier | Type |
+|---|---|
+| `validatePassword`, `equalArray`, `shuffleArray` | Fonctions utilitaires pures |
+| `handleExpiredToken`, `translateValue`, `translateArray` | Fonctions utilitaires pures |
+| `HttpError`, `fetchJson` | Client HTTP (apiClient) |
+| `auth.service`, `games.service` | Services frontend |
+| `questions.service`, `scores.service`, `user.service` | Services frontend |
+
+### Configuration Jest (ES Modules)
+
+Ce projet utilise Vite avec `"type": "module"`. Jest nécessite une configuration spécifique :
+
+```json
+"scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
+}
+```
+
+Pour mocker un module avec les ES Modules natifs, utiliser `jest.unstable_mockModule` avec des imports dynamiques :
+
+```js
+jest.unstable_mockModule("./apiClient.js", () => ({
+    fetchJson: jest.fn()
+}));
+
+const { register } = await import("./auth.service.js");
+```
+
+---
+
+## Architecture
+
+```
+src/
+├─ atom/                  # État global avec Jotai
+├─ components/            # Composants réutilisables
+│  ├─ dashboard/          # Statistiques et graphiques
+│  ├─ forms/              # Formulaires (login, register, quiz, questions)
+│  ├─ games/              # Composants quiz (solo)
+│  ├─ modal/              # Popups et toasts
+│  ├─ nav/                # Navigation desktop et mobile
+│  └─ protectedRoute/     # Protection des routes authentifiées
+├─ hooks/                 # Custom hooks (useAuth, useGames, useQuestions...)
+├─ pages/                 # Pages principales (home, quiz, stats, admin...)
+├─ services/              # Appels API centralisés via fetchJson
+├─ styles/                # Variables SCSS globales
+└─ utils/                 # Fonctions utilitaires
+```
+
+### Gestion des appels API
+
+Tous les appels HTTP passent par `fetchJson` dans `apiClient.js` — une fonction centralisée qui gère les headers, le token JWT et les erreurs HTTP via une classe `HttpError` :
+
+```
+Composant → Hook custom → Service → fetchJson → API
+```
+
+### Gestion de l'authentification
+
+- Token JWT stocké dans un atom Jotai
+- Vérification du token à chaque navigation via `ProtectedRoute`
+- Expiration automatique gérée par `handleExpiredToken` — redirige vers `/` et nettoie le state
+
+---
 
 ## À venir
 
 - Quiz multijoueur
 - Classement global
-- Mode hors-ligne
+- Consultation du profil des autres utilisateurs
+- Gestion des rôles (admin / utilisateur) via l'espace admin
+- Entrer une demande pour devenir admin et contribuer
+- Formulaire de contact
 
+---
 
-## Structure du projet
-```
-src/
-├─ App.css                # Styles globaux de l’application
-├─ App.jsx                # Composant racine React
-├─ index.css              # CSS global de base
-├─ main.jsx               # Point d’entrée React
-├─ assets/                # Assets statiques (images, SVG, logos, etc.)
-│  └─ (images, svgs, logos...)
-├─ atom/                  # État global avec Jotai atoms
-│  └─ atom.js
-├─ components/            # Composants réutilisables et spécifiques
-│  ├─ dashboard/          # Composants du dashboard admin
-│  │  ├─ charts/          # Graphiques et visualisations
-│  │  │  ├─ byDateChart/
-│  │  │  ├─ byDifficulty/
-│  │  │  └─ byTheme/
-│  │  ├─ overview/       # Composant récapitulatif du dashboard
-│  │  │  ├─ overview.jsx
-│  │  │  └─ overview.module.css
-│  │  ├─ preferences/    # Gestion des préférences utilisateurs
-│  │  └─ profile/        # Profil utilisateur
-│  ├─ forms/             # Formulaires (login, register, quiz, questions)
-│  │  ├─ add-questions/
-│  │  │  ├─ add-questions.jsx
-│  │  │  └─ add-questions.module.css
-│  │  ├─ config-game/
-│  │  │  ├─ config-game.jsx
-│  │  │  └─ config-game.module.css
-│  │  ├─ login/
-│  │  │  ├─ login.jsx
-│  │  │  └─ login.module.css
-│  │  ├─ register/
-│  │  │  ├─ register.jsx
-│  │  │  └─ register.module.css
-│  │  └─ update-questions/
-│  │     ├─ update-questions.jsx
-│  │     └─ update-questions.module.css
-│  ├─ games/              # Composants liés aux jeux
-│  │  └─ solo/
-│  │     ├─ solo.jsx
-│  │     └─ solo.module.css
-│  ├─ manage-questions/   # Gestion et affichage des questions
-│  │  └─ manage-questions.jsx
-│  ├─ modal/              # Popups et notifications
-│  │  ├─ popup-config/
-│  │  ├─ popup-quizResults/
-│  │  └─ toast/           # Toasts de notification
-│  ├─ nav/                # Navigation (desktop et mobile)
-│  │  ├─ nav-desktop/
-│  │  └─ nav-mobile/
-│  ├─ protectedRoute/     # Route protégée pour pages sécurisées
-│  │  └─ protectedRoute.jsx
-│  └─ searchBar/          # Barre de recherche
-│     ├─ searchBar.jsx
-│     └─ searchBar.module.css
-├─ hooks/                 # Custom hooks réutilisables
-│  ├─ useAuth.js
-│  ├─ useDebounce.js
-│  ├─ useGames.js
-│  ├─ useQuestions.js
-│  ├─ useScores.js
-│  └─ useUser.js
-├─ layouts/               # Composants de layout réutilisables
-│  ├─ footer/
-│  │  ├─ footer.jsx
-│  │  └─ footer.module.css
-│  ├─ header/
-│  │  ├─ header.jsx
-│  │  └─ header.module.css
-│  └─ home-header/
-│     ├─ home-header.jsx
-│     └─ home-header.module.css
-├─ pages/                 # Pages principales de l’application
-│  ├─ admin/
-│  │  ├─ admin.route.jsx
-│  │  └─ admin.route.module.css
-│  ├─ getStarted/
-│  │  ├─ getStarted.route.jsx
-│  │  └─ getStarted.route.module.css
-│  ├─ home/
-│  │  ├─ home.route.jsx
-│  │  └─ home.route.module.css
-│  ├─ quiz/
-│  │  ├─ quiz.jsx
-│  │  └─ quiz.module.css
-│  ├─ quiz-config/
-│  │  ├─ quiz-config.route.jsx
-│  │  └─ quiz-config.route.module.css
-│  └─ stats/
-│     ├─ stat.route.jsx
-│     └─ stat.route.module.css
-├─ services/             # API calls et logique réseau
-│  ├─ auth.service.js
-│  ├─ games.service.js
-│  ├─ questions.service.js
-│  ├─ scores.service.js
-│  └─ user.service.js
-├─ styles/               # Variables SCSS et styles globaux
-│  └─ variables-colors.scss
-└─ utils/                # Fonctions utilitaires
-   ├─ equalArray.js
-   ├─ expiredToken.js
-   ├─ shuffleArray.js
-   ├─ translate-mapping.js
-   └─ validation.js
-```
+## Améliorations techniques identifiées
+
+- **Sentry** — monitoring des erreurs inattendues en production (réseau coupé, serveur planté)
+- **TanStack Query** — remplacement des hooks custom par une gestion du cache et du loading plus fine

@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { useState } from "react";
-import { gameConfigAtom, questionsAtom, tokenAtom, userAtom } from "../atom/atom.js";
+import { tokenAtom, userAtom } from "../atom/atom.js";
 import * as scoresService from "../services/scores.service.js";
 import { useNavigate } from "react-router";
 import { handleExpiredToken } from "../utils/expiredToken.js";
@@ -9,9 +9,6 @@ import { handleExpiredToken } from "../utils/expiredToken.js";
 export default function useScores() {
     const [token, setToken] = useAtom(tokenAtom);
     const [user, setUser] = useAtom(userAtom);
-    const [gameConfig, setGameConfig] = useAtom(gameConfigAtom);
-    const [questions, setQuestions] = useAtom(questionsAtom);
-    const [hasMore, setHasMore] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -70,5 +67,6 @@ export default function useScores() {
         fetchAddResults,
         fetchFilteredResults,
         fetchScoreByUserId,
+        isLoading
     }
 }

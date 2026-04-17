@@ -29,50 +29,10 @@
     }
 }
 
-.dash_item {
-    width: 90%;
-    margin: 0 auto;
-    padding: .8rem 1.6rem;
-    color: var(--text-normal);
-    background-color: transparent;
-    border: none;
-    display: flex;
-    align-items: center;
-
-    &>span {
-        opacity: .6;
-    }
-
-    &>span:first-child {
-        width: 100px;
-        font-size: 24px;
-        color: var(--solid-normal);
-    }
-
-    &>span:last-child {
-        margin-left: 1.6rem;
-    }
-
-    &.user_profile {
-        margin-bottom: 2.6rem;
-        border-bottom: 1px solid var(--borders-normal);
-
-        &>span {
-            opacity: 1;
-        }
-    }
-
-    &:hover>span {
-        opacity: 1;
-    }
-}
-
-.isSelected {
-    background-color: var(--secondary20-normal);
-    border-radius: 3.2rem;
-}
-
 .dash_tiles {
     width: 100%;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,0 +1,375 @@
+/* --- GLOBAL --- */
+.btn {
+    border: none;
+    transition: .3s all ease-out;
+    cursor: pointer;
+}
+
+/* --- FORMS --- */
+.btn_submit {
+    margin: 3.2rem 0;
+    padding: .8rem 3.2rem;
+    align-self: center;
+    background-color: var(--primary-normal);
+    border-radius: 3.2rem;
+
+    &:hover {
+        background-color: var(--primary-dark);
+    }
+}
+
+.btn_switch {
+    padding: .4rem .8rem;
+    font-size: clamp(1rem, 1.1rem + 0.3vw, 1.4rem);
+    color: var(--text-normal);
+    background-color: transparent;
+    border-radius: .8rem;
+    transform-origin: right;
+
+    &:hover,
+    &:active {
+        color: var(--primary-normal);
+        text-decoration: underline;
+    }
+}
+
+.btn_back {
+    padding: .8rem 3.2rem;
+    color: var(--text-normal);
+    background-color: transparent;
+    border: 2px solid var(--borders-normal);
+    border-radius: 3.2rem;
+    align-self: center;
+
+    &:hover {
+        color: var(--text-light);
+        background-color: rgba(107, 114, 128, 0.2);
+        border: 2px solid var(--borders-light);
+    }
+}
+
+/* --- PROFILE.JSX */
+.btn_control {
+    margin-top: 1rem;
+    padding: .3rem 2rem;
+    color: var(--text-normal);
+    background-color: transparent;
+    outline: none;
+    border-radius: .8rem;
+
+    &:first-child {
+        color: var(--warning-normal);
+    }
+
+    &:last-child {
+        color: var(--success-normal);
+    }
+
+    &:hover {
+        scale: 1.5;
+    }
+}
+
+.btn_update {
+    width: 50%;
+    margin: auto;
+    padding: 1.5rem;
+    color: var(--text-normal);
+    text-align: center;
+    background-color: var(--solid50-normal);
+    border-radius: .8rem;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+
+    @media screen and (min-width:960px) {
+        width: 100%;
+        margin: 0;
+    }
+
+    &:hover {
+        background-color: var(--solid60-normal);
+        transform: translateY(-2px);
+    }
+}
+
+/* --- SOLO.JSX --- */
+.btn_answer {
+    color: var(--text-normal);
+    background-color: transparent;
+    border-radius: .8rem;
+    border: 1px solid var(--borders-normal);
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: .3s all ease-out;
+
+    &:hover {
+        background-color: var(--bg-light-normal);
+    }
+
+    &>span:last-child {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.correct {
+    color: var(--success-darker);
+    background-color: var(--success-normal);
+
+    &:hover {
+        color: var(--success-darker);
+        background-color: var(--success-normal);
+    }
+}
+
+.incorrect {
+    color: var(--danger-darker);
+    background-color: var(--danger-normal);
+
+    &:hover {
+        color: var(--danger-darker);
+        background-color: var(--danger-normal);
+    }
+}
+
+.btn_next {
+    width: 100%;
+    background-color: var(--primary-normal);
+    border-radius: .8rem;
+    border: none;
+    cursor: pointer;
+    transition: .3s all ease-out;
+
+    &:hover {
+        box-shadow: 0 0 35px -10px var(--primary-normal);
+        transform: translate(0, -3px);
+    }
+}
+
+/* --- POPUP_CONFIG.JSX --- */
+.btn_play {
+    padding: 1.6rem;
+    color: var(--text-inverted-normal);
+    font-weight: bold;
+    background: linear-gradient(120deg, var(--primary-normal), var(--solid-normal));
+    border: none;
+    border-radius: 1.6rem;
+    cursor: pointer;
+
+    &:hover {
+        color: var(--text-light);
+        background-color: var(--primary-normal);
+        border: none;
+        box-shadow: 0 20px 80px -10px var(--primary-normal);
+        transform: translate(0, -3px);
+    }
+}
+
+.btn_back_popup {
+    padding: 1.6rem;
+    color: var(--text-normal);
+    background-color: transparent;
+    border: 2px solid var(--borders-normal);
+    border-radius: 1.6rem;
+    transition: .3s all ease-out;
+
+    &:hover {
+        color: var(--text-light);
+        background-color: rgba(107, 114, 128, 0.1);
+        border: 2px solid var(--borders-light);
+    }
+}
+
+/* --- POPUP_QUIZRESULTS.JSX */
+.btn_quiz_results {
+    margin: 3.2rem 0;
+    padding: 1.6rem 3.2rem;
+    color: var(--text-inverted-normal);
+    font-weight: bold;
+    background: linear-gradient(120deg, var(--primary-normal), var(--solid-normal));
+    border: none;
+    border-radius: 1.6rem;
+    align-self: center;
+    transition: .3s all ease-out;
+    cursor: pointer;
+
+    &:hover {
+        color: var(--text-light);
+        background-color: var(--primary-normal);
+        border: none;
+        box-shadow: 0 20px 80px -10px var(--primary-normal);
+        transform: translate(0, -3px);
+    }
+}
+
+/* --- MANAGE-QUESTIONS.JSX */
+.btn_refresh {
+    width: fit-content;
+    margin: 5rem auto;
+    padding: .8rem 3.2rem;
+    align-self: center;
+    background-color: var(--primary-normal);
+    border: none;
+    border-radius: 3.2rem;
+    transition: .3s all ease-out;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--primary-dark);
+    }
+}
+
+.edit_btn {
+    color: var(--info-normal);
+    border: 1px solid var(--info-normal);
+    background-color: transparent;
+    transition: .3s all ease-out;
+
+    &:hover {
+        color: var(--text-normal);
+        background-color: var(--info-normal);
+        border: 1px solid var(--info-dark);
+    }
+}
+
+.delete_btn {
+    color: var(--danger-normal);
+    border: 1px solid var(--danger-normal);
+    background-color: transparent;
+    transition: .3s all ease-out;
+
+    &:hover {
+        color: var(--text-inverted-normal);
+        background-color: var(--danger-normal);
+        border: 1px solid var(--danger-dark);
+    }
+}
+
+.btn_more {
+    margin-bottom: 0;
+    background-color: var(--info-normal);
+    cursor: pointer;
+
+    &:hover {
+        color: var(--text-normal);
+        background-color: var(--info-dark);
+    }
+}
+
+/* --- ADMIN.ROUTE.JSX --- */
+.btn_options {
+    margin: 0 auto 3rem;
+    display: block;
+    padding: 1rem;
+    color: var(--primary-darker);
+    background-color: var(--primary-normal);
+    border: 1px solid var(--primary-darker);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+        content: "Modifier ou supprimer des questions";
+        width: 300px;
+        height: fit-content;
+        padding: .8rem 1.6rem;
+        font-size: 1.2rem;
+        color: var(--primary-darker);
+        background-color: var(--primary-light);
+        border: 1px solid var(--primary-dark);
+        border-radius: .8rem;
+        position: absolute;
+        top: -5rem;
+        left: -13rem;
+        opacity: 0;
+        transition: .3s all ease-in-out;
+    }
+
+    &::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        background-color: var(--primary-dark);
+        position: absolute;
+        top: -1.8rem;
+        left: 50%;
+        transform: rotate(45deg) translateX(-50%);
+        z-index: -1;
+        opacity: 0;
+        transition: .3s all ease-in-out;
+    }
+
+    &:hover {
+        background-color: var(--primary-dark);
+    }
+
+    &:hover::before,
+    &:hover::after {
+        opacity: 1;
+    }
+}
+
+.btn_back_admin {
+    margin: 2rem auto 5rem;
+    padding: .8rem 3.2rem;
+    color: var(--text-normal);
+    background-color: transparent;
+    border: 2px solid var(--borders-normal);
+    border-radius: 3.2rem;
+    transition: .3s all ease-out;
+    align-self: center;
+    cursor: pointer;
+
+    &:hover {
+        color: var(--text-light);
+        background-color: rgba(107, 114, 128, 0.2);
+        border: 2px solid var(--borders-light);
+    }
+}
+
+
+/* --- STAT.ROUTE.JSX --- */
+.dash_item {
+    width: 90%;
+    margin: 0 auto;
+    padding: .8rem 1.6rem;
+    color: var(--text-normal);
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+
+    &>span {
+        opacity: .6;
+    }
+
+    &>span:first-child {
+        width: 100px;
+        font-size: 24px;
+        color: var(--solid-normal);
+    }
+
+    &>span:last-child {
+        margin-left: 1.6rem;
+    }
+
+    &.user_profile {
+        margin-bottom: 2.6rem;
+        border-bottom: 1px solid var(--borders-normal);
+
+        &>span {
+            opacity: 1;
+        }
+    }
+
+    &:hover>span {
+        opacity: 1;
+    }
+}
+
+.isSelected {
+    background-color: var(--secondary20-normal);
+    border-radius: 3.2rem;
+}

@@ -6,6 +6,9 @@ import { useNavigate } from "react-router";
 import { GiCheckMark, GiCrossMark } from "react-icons/gi";
 import useScores from "../../../hooks/useScores.js";
 import useGames from "../../../hooks/useGames.js";
+import Button from "../../ui/buttons/buttons.jsx";
+import { useState } from "react";
+import Toast from "../toast/toast.jsx";
 
 export default function QuizResultsPopup({ answersLog, questions }) {
     const [user] = useAtom(userAtom);
@@ -13,9 +16,14 @@ export default function QuizResultsPopup({ answersLog, questions }) {
     const { fetchCreateGame } = useGames();
     const { fetchAddResults } = useScores();
     const navigate = useNavigate();
+    const [toast, setToast] = useState(null);
 
     function getScore() {
         return answersLog.filter(a => a.is_correct).length;
+    }
+
+    function getTimeSpent() {
+        return answersLog.map(q => q.time_spent).reduce((acc, n) => acc + n, 0);
     }
 
     async function handleEndQuiz() {
@@ -27,7 +35,7 @@ export default function QuizResultsPopup({ answersLog, questions }) {
                     question_id: q.question_id,
                     user_answer: answersLog.find(a => a.question_id === q.question_id)?.user_answer || null,
                 }));
-                
+
                 const response = await fetchCreateGame(
                     nbToSend,
                     gameConfig.theme,
@@ -40,17 +48,20 @@ export default function QuizResultsPopup({ answersLog, questions }) {
                 setGameConfig(prev => ({ ...prev, gameId }));
             }
 
-            // todo: ajouter le temps des réponses
             await fetchAddResults(
                 gameId,
                 getScore(),
-                null,
+                getTimeSpent(),
                 { total: questions.length },
                 answersLog
             );
 
         } catch (error) {
             console.error("Erreur lors de la sauvegarde des résultats :", error);
+            setToast({ message: "Une erreur est survenue lors de la sauvegarde de tes résultats.", type: "error" });
+            setTimeout(() => navigate("/getStarted"), 3500);
+            return;
+
         } finally {
             setGameConfig({
                 theme: null,
@@ -58,8 +69,9 @@ export default function QuizResultsPopup({ answersLog, questions }) {
                 mode: null,
                 game_id: null
             });
-            navigate("/getStarted");
         }
+        
+        navigate("/getStarted");
     };
 
 
@@ -90,7 +102,16 @@ export default function QuizResultsPopup({ answersLog, questions }) {
                     </li>
                 ))}
             </ul>
-            <button className={styles.btn} onClick={() => handleEndQuiz()}>Retour</button>
+            <Button
+                type="button"
+                onClick={() => handleEndQuiz()}
+                variant={"btn_quiz_results"}
+            >
+                Retour
+            </Button>
+
+            {/* TOAST */}
+            {toast && (<Toast message={toast.message} type={toast.type} onDismiss={() => setToast(null)} />)}
         </div>
     )
 }

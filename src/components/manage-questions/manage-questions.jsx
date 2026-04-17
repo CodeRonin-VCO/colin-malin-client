@@ -8,10 +8,11 @@ import Toast from "../modal/toast/toast.jsx";
 import { CiMenuKebab } from "react-icons/ci";
 import UpdateQuestionsForm from "../forms/update-questions/update-questions.jsx";
 import SearchBar from "../searchBar/searchBar.jsx";
+import Button from "../ui/buttons/buttons.jsx";
 
 export default function ManageQuestionsAdmin() {
     const { fetchGetAll, fetchDelete, isLoading, hasMore } = useQuestions();
-    const [questions, setQuestions] = useAtom(questionsAtom);
+    const [questions] = useAtom(questionsAtom);
     const [offset, setOffset] = useState(0);
     const [refreshTrigger, setRefreshTrigger] = useState(0);
     let limit = 20;
@@ -21,7 +22,7 @@ export default function ManageQuestionsAdmin() {
 
     useEffect(() => {
         fetchGetAll(offset, limit);
-    }, [offset, limit, refreshTrigger]);
+    }, [offset, limit, refreshTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
     function handleRefresh() {
         setOffset(0);
@@ -44,16 +45,22 @@ export default function ManageQuestionsAdmin() {
             await fetchGetAll(offset, limit);
 
         } catch (error) {
-            setToast({ message: "Erreur lors de la suppression de la question.", type: "error" })
+            setToast({ message: "Erreur lors de la suppression de la question.", type: "error" });
+            console.error("Erreur suppression question :", error);
         }
     };
 
 
     return (
         <>
-            <button className={styles.btn_refresh} onClick={() => handleRefresh()} disabled={isLoading}>
+            <Button
+                type="button"
+                variant={"btn_refresh"}
+                onClick={() => handleRefresh()}
+                disabled={isLoading}
+            >
                 {isLoading ? "Chargement..." : "Actualiser la liste"}
-            </button>
+            </Button>
             <SearchBar />
             <ul className={styles.questions_list}>
                 {questions.map((q) => (
@@ -74,8 +81,20 @@ export default function ManageQuestionsAdmin() {
                             {/* Popup Kebab menu */}
                             {kebabMenuOpen === q.question_id && (
                                 <div className={styles.container_btn}>
-                                    <button className={styles.edit_btn} onClick={() => setUpdateFormOpen(q.question_id)}>Modifier</button>
-                                    <button className={styles.delete_btn} onClick={() => deleteQuestion(q.question_id)}>Supprimer</button>
+                                    <Button
+                                        type="button"
+                                        onClick={() => setUpdateFormOpen(q.question_id)}
+                                        variant={"edit_btn"}
+                                    >
+                                        Modifier
+                                    </Button>
+                                    <Button
+                                        type="button"
+                                        onClick={() => deleteQuestion(q.question_id)}
+                                        variant={"delete_btn"}
+                                    >
+                                        Supprimer
+                                    </Button>
                                 </div>
                             )}
 
@@ -93,9 +112,15 @@ export default function ManageQuestionsAdmin() {
                 ))}
             </ul>
             {hasMore && (
-                <button onClick={() => loadMoreQuestions()} disabled={isLoading} className={`${styles.btn_refresh} ${styles.btn_more}`}>
+                <Button
+                    type="button"
+                    onClick={() => loadMoreQuestions()}
+                    variant={"btn_refresh"}
+                    state={"btn_more"}
+                    disabled={isLoading}
+                >
                     {isLoading ? "Chargement..." : "Charger plus"}
-                </button>
+                </Button>
             )}
 
             {/* TOAST */}

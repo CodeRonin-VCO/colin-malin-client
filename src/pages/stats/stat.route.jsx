@@ -10,6 +10,7 @@ import { useState } from "react";
 import OverviewDashboard from "../../components/dashboard/overview/overview.jsx";
 import ProfileDashboard from "../../components/dashboard/profile/profile.jsx";
 import PreferencesDashboard from "../../components/dashboard/preferences/preferences.jsx";
+import Button from "../../components/ui/buttons/buttons.jsx";
 
 export default function StatPage() {
     const [user] = useAtom(userAtom);
@@ -21,22 +22,41 @@ export default function StatPage() {
             <HeaderLayout />
             <main className={styles.main}>
                 <div className={styles.sidebar}>
-                    <button className={`${styles.dash_item} ${styles.user_profile}`}>
+                    <Button
+                        type="button"
+                        variant={"dash_item"}
+                        state={"user_profile"}
+                    >
                         <span><FaUserCircle /></span>
                         <span>{user?.username || "Coolest User"}</span>
-                    </button>
-                    <button className={`${styles.dash_item} ${isSelected === "overview" ? styles.isSelected : ""}`} onClick={() => setIsSelected("overview")}>
+                    </Button>
+                    <Button
+                        type="button"
+                        onClick={() => setIsSelected("overview")}
+                        variant={"dash_item"}
+                        state={isSelected === "overview" ? "isSelected" : ""}
+                    >
                         <span><FaChartBar /></span>
                         <span>Aperçu</span>
-                    </button>
-                    <button className={`${styles.dash_item} ${isSelected === "profile" ? styles.isSelected : ""}`} onClick={() => setIsSelected("profile")}>
+                    </Button>
+                    <Button
+                        type="button"
+                        onClick={() => setIsSelected("profile")}
+                        variant={"dash_item"}
+                        state={isSelected === "profile" ? "isSelected" : ""}
+                    >
                         <span><ImProfile /></span>
                         <span>Profil</span>
-                    </button>
-                    <button className={`${styles.dash_item} ${isSelected === "preferences" ? styles.isSelected : ""}`} onClick={() => setIsSelected("preferences")}>
+                    </Button>
+                    <Button
+                        type="button"
+                        onClick={() => setIsSelected("preferences")}
+                        variant={"dash_item"}
+                        state={isSelected === "preferences" ? "isSelected" : ""}
+                    >
                         <span><FaGears /></span>
                         <span>Préférences</span>
-                    </button>
+                    </Button>
                 </div>
                 <div className={styles.dash_tiles}>
                     {isSelected === "overview" && (<OverviewDashboard />)}

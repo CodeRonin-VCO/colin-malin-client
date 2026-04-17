@@ -128,37 +128,4 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2.4rem;
-
-    button {
-        padding: 1.6rem;
-        color: var(--text-normal);
-        background-color: transparent;
-        border: 2px solid var(--borders-normal);
-        border-radius: 1.6rem;
-        transition: .3s all ease-out;
-
-        &:hover {
-            color: var(--text-light);
-            background-color: rgba(107, 114, 128, 0.1);
-            border: 2px solid var(--borders-light);
-        }
-    }
-}
-
-.btn_play {
-    padding: 1.6rem;
-    color: var(--text-inverted-normal);
-    font-weight: bold;
-    background: linear-gradient(120deg, var(--primary-normal), var(--solid-normal));
-    border: none;
-    border-radius: 1.6rem;
-    cursor: pointer;
-
-    &:hover {
-        color: var(--text-light);
-        background-color: var(--primary-normal);
-        border: none;
-        box-shadow: 0 20px 80px -10px var(--primary-normal);
-        transform: translate(0, -3px);
-    }
 }

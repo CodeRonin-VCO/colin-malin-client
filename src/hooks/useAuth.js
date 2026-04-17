@@ -10,34 +10,24 @@ export default function useAuth() {
     const [user, setUser] = useAtom(userAtom);
 
     const fetchRegister = async (username, email, password) => {
-        try {
-            const { user: newUser } = await authService.register(username, email, password);
-            await fetchLogin(email, password);
-            return { success: true, user: newUser };
-
-        } catch (error) {
-            throw error;
-        };
+        const { user: newUser } = await authService.register(username, email, password);
+        await fetchLogin(email, password);
+        return { success: true, user: newUser };
     };
 
     const fetchLogin = async (email, password) => {
-        try {
-            const { token, user: userData } = await authService.login(email, password);
-            setToken(token);
+        const { token, user: userData } = await authService.login(email, password);
+        setToken(token);
 
-            let completeUser = userData;
+        let completeUser = userData;
 
-            if (token && userData) {
-                const fullUserFetched = await userService.getUser(token);
-                completeUser = {...userData, ...fullUserFetched.user}
-            }
-            setUser(completeUser);
-
-            return { success: true };
-
-        } catch (error) {
-            throw error;
+        if (token && userData) {
+            const fullUserFetched = await userService.getUser(token);
+            completeUser = {...userData, ...fullUserFetched.user}
         }
+        setUser(completeUser);
+
+        return { success: true };
     };
 
     const fetchLogout = async () => {
@@ -51,12 +41,7 @@ export default function useAuth() {
     };
 
     const fetchUpdatePassword = async (oldPassword, newPassword) => {
-        try {
-            await authService.updatePassword(user.email, oldPassword, newPassword);
-
-        } catch (error) {
-            throw error;
-        }
+        await authService.updatePassword(user.email, oldPassword, newPassword);
     };
 
     return {

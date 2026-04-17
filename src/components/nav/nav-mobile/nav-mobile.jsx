@@ -7,7 +7,7 @@ import useAuth from "../../../hooks/useAuth.js";
 
 export default function NavMobile() {
     const [isOpen, setIsOpen] = useState(false);
-    const { fetchLogout } = useAuth();
+    const { fetchLogout, user } = useAuth();
     const navigate = useNavigate();
 
     const handleLogout = async (e) => {
@@ -27,10 +27,11 @@ export default function NavMobile() {
             {isOpen && (
                 <nav className={styles.panel}>
                     <NavLink to={"/getStarted"} className={({ isActive }) => isActive ? styles.active : ""}>Get started</NavLink>
-                    <NavLink to={"/quiz-config"} className={({ isActive }) => isActive ? styles.active : ""}>Quiz config</NavLink>
-                    <NavLink to={"/quiz"} className={({ isActive }) => isActive ? styles.active : ""}>Quiz</NavLink>
-                    <NavLink to={"/stat"} className={({ isActive }) => isActive ? styles.active : ""}>Statistiques</NavLink>
-                    <NavLink to={"/admin"} className={({ isActive }) => isActive ? styles.active : ""}>Admin</NavLink>
+                    <NavLink to={"/quiz-config"} className={({ isActive }) => isActive ? styles.active : ""}>Quiz</NavLink>
+                    <NavLink to={"/stat"} className={({ isActive }) => isActive ? styles.active : ""}>Dashboard</NavLink>
+                    {user.role === "admin" && (
+                        <NavLink to={"/admin"} className={({ isActive }) => isActive ? styles.active : ""}>Admin</NavLink>
+                    )}
                     <NavLink to={"/"} className={({ isActive }) => isActive ? styles.active : ""} title="Log out" onClick={handleLogout}>
                         <IoIosLogOut />
                         <span>Log out</span>

@@ -3,6 +3,7 @@ import styles from "./register.module.css";
 import useAuth from "../../../hooks/useAuth.js";
 import { validatePassword } from "../../../utils/validation.js";
 import { useNavigate } from "react-router";
+import Button from "../../ui/buttons/buttons.jsx";
 
 
 export default function RegisterForm({ setSwitchForm }) {
@@ -94,14 +95,20 @@ export default function RegisterForm({ setSwitchForm }) {
                 <input type="password" id="confirmPassword" name="confirmPassword" />
             </div>
 
-            <button className={styles.btn_submit} type="submit" disabled={isPending}>{isPending ? "Signing up.." : "Sign up"}</button>
-            {/* {state.message && (
+            {state.message && (
                 <p className={state.success ? styles.success_msg : styles.error_msg}>{state.message}</p>
-            )} */}
+            )}
+            
+            <Button type="submit" variant={"btn_submit"} disabled={isPending}>
+                {isPending ? "Signing up.." : "Sign up"}
+            </Button>
+
 
             <div className={styles.register_link}>
                 <p>Déjà un compte ?</p>
-                <button type="button" className={styles.btn_switch} onClick={() => setSwitchForm(true)}>Sign in</button>
+                <Button type="button" variant={"btn_switch"} onClick={() => setSwitchForm(true)}>
+                    Sign in
+                </Button>
             </div>
         </form>
     )

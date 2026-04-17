@@ -21,12 +21,6 @@ export default function useGames() {
             return { success: true, response, totalCountGames, totalCountQuestions, totalCorrectAnswers };
 
         } catch (error) {
-            console.log({
-                isHttpError: error instanceof Error,
-                status: error.status,
-                message: error.message,
-                rawError: error,
-            });
             const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
             if (!isTokenExpired) throw error;
 
@@ -73,6 +67,7 @@ export default function useGames() {
     return {
         fetchGetGames,
         fetchCreateGame,
-        fetchGetGameById
+        fetchGetGameById,
+        isLoading
     }
 }

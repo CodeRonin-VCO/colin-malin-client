@@ -54,7 +54,7 @@ export default function ProgressByDateChart() {
 
         loadScores();
 
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     const dates = ["", ...scoresData.map((s) => formatShortDate(s.created_at))];
     const scores = [0, ...scoresData.map((s) => (s.points / s.nb_questions) * 10)];

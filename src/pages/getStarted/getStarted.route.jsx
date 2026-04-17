@@ -7,9 +7,11 @@ import { LuBrain } from "react-icons/lu";
 import { BsLightning } from "react-icons/bs";
 import { GoClock, GoPeople, GoTrophy } from "react-icons/go";
 import { PiTarget } from "react-icons/pi";
+import { useAtom } from "jotai";
+import { userAtom } from "../../atom/atom.js";
 
 export default function GetStartedPage() {
-
+    const [user] = useAtom(userAtom);
 
     return (
         <div className="page">
@@ -42,7 +44,11 @@ export default function GetStartedPage() {
                     <div className={`${styles.card} ${styles.card_admin}`}>
                         <h5>Création de question</h5>
                         <p>Participe à notre base de données et rajoute tes questions.</p>
-                        <Link to={"/admin"} className={styles.btn}>Je contribue</Link>
+                        {user.role === "admin" ? (
+                            <Link to={"/admin"} className={styles.btn}>Je contribue</Link>
+                        ) : (
+                            <Link to="#" className={styles.btn} onClick={(e) => e.preventDefault()} style={{cursor: "not-allowed"}}>Réservé aux admins</Link>
+                        )}
                     </div>
                 </article>
 
@@ -66,8 +72,8 @@ export default function GetStartedPage() {
                         <span>Sciences</span>
                         <span>Histoire</span>
                         <span>Géographie</span>
-                        <span>Cinéma</span>
                         <span>Sport</span>
+                        <span>Sociologie</span>
                         <span>Technologies</span>
                     </div>
                 </article>
@@ -81,7 +87,7 @@ export default function GetStartedPage() {
                             <h6>7 Thèmes variés</h6>
                             <p>Histoire, Sciences, Culture, Sport, Géographie, Sociologie et Toutes les thèmes. Trouvez la catégorie qui vous intéresse.</p>
                         </div>
-                        
+
                         <div className={`${styles.card_about} ${styles.card_about_timer}`}>
                             <div className={styles.icon}><BsLightning /></div>
                             <h6>Timer de 10 secondes</h6>

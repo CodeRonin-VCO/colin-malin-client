@@ -1,5 +1,3 @@
-"use strict";
-
 export class HttpError extends Error {
     constructor(status, message, body = null) {
         super(message);
@@ -11,8 +9,7 @@ export class HttpError extends Error {
 
 
 export async function fetchJson(path, { method = "GET", token, body } = {}) {
-    const url = `${import.meta.env.VITE_API_URL}${path}`;
-    console.log("FETCH URL:", url);
+    const url = `${import.meta.env?.VITE_API_URL ?? "http://localhost:8008/api"}${path}`;
 
     const res = await fetch(url, {
         method,
@@ -28,7 +25,7 @@ export async function fetchJson(path, { method = "GET", token, body } = {}) {
     try {
         data = await res.json();
     } catch {
-        data = null; // réponse vide ou non-JSON
+        data = null;
     }
 
     if (!res.ok) {

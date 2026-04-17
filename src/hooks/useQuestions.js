@@ -7,9 +7,9 @@ import { handleExpiredToken } from "../utils/expiredToken.js";
 
 export default function useQuestions() {
     const [token, setToken] = useAtom(tokenAtom);
-    const [user, setUser] = useAtom(userAtom);
-    const [gameConfig, setGameConfig] = useAtom(gameConfigAtom);
-    const [questions, setQuestions] = useAtom(questionsAtom);
+    const [, setUser] = useAtom(userAtom);
+    const [gameConfig] = useAtom(gameConfigAtom);
+    const [, setQuestions] = useAtom(questionsAtom);
     const [hasMore, setHasMore] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -52,6 +52,7 @@ export default function useQuestions() {
     };
 
     const fetchCreate = async (questionData) => {
+        setIsLoading(true);
         try {
             const response = await questionsService.create(token, questionData);
 
@@ -61,10 +62,13 @@ export default function useQuestions() {
             const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
             if (!isTokenExpired) throw error;
             
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const fetchFiltered = async () => {
+        setIsLoading(true);
         try {
             const response = await questionsService.filtered(token, gameConfig);
             setQuestions(response.questions);
@@ -75,10 +79,13 @@ export default function useQuestions() {
             const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
             if (!isTokenExpired) throw error;
             
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const fetchGetById = async (question_id) => {
+        setIsLoading(true);
         try {
             const response = await questionsService.getById(token, question_id);
 
@@ -88,9 +95,12 @@ export default function useQuestions() {
             const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
             if (!isTokenExpired) throw error;
             
+        } finally {
+            setIsLoading(false);
         }
     };
     const fetchModify = async (question_id, updatedData) => {
+        setIsLoading(true);
         try {
             const response = await questionsService.modify(token, question_id, updatedData);
 
@@ -100,9 +110,12 @@ export default function useQuestions() {
             const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
             if (!isTokenExpired) throw error;
             
+        } finally {
+            setIsLoading(false);
         }
     };
     const fetchDelete = async (question_id) => {
+        setIsLoading(true);
         try {
             const response = await questionsService.deleteQuestion(token, question_id);
 
@@ -112,6 +125,8 @@ export default function useQuestions() {
             const isTokenExpired = handleExpiredToken(error, setToken, setUser, navigate)
             if (!isTokenExpired) throw error;
             
+        } finally {
+            setIsLoading(false);
         }
     };
 

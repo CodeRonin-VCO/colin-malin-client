@@ -45,7 +45,7 @@ export default function ProgressByDifficultyChart() {
 
         loadScores();
 
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     // ==== Initialisation des difficultés ====
     const difficulties = ["low", "medium", "high", "all"];

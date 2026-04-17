@@ -2,9 +2,10 @@ import { useActionState } from "react";
 import useQuestions from "../../../hooks/useQuestions.js";
 import styles from "./update-questions.module.css";
 import { arraysEqual } from "../../../utils/equalArray.js";
+import Button from "../../ui/buttons/buttons.jsx";
 
 export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, question, setToast }) {
-    const { fetchModify, fetchGetAll } = useQuestions();
+    const { fetchModify } = useQuestions();
 
     async function addQuestionsAction(prevState, formData) {
         const data = {
@@ -26,7 +27,7 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
         if (!arraysEqual(data.answers, question.answers)) updates.answers = data.answers;
         if (data.correct_answer !== question.correct_answer) updates.correct_answer = data.correct_answer;
         if (data.difficulty !== question.difficulty) updates.difficulty = data.difficulty;
-    
+
 
         try {
             await fetchModify(questionId, updates);
@@ -64,6 +65,7 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
                     <option value="geography">Géographie</option>
                     <option value="history">Histoire</option>
                     <option value="sport">Sport</option>
+                    <option value="technology">Technologies</option>
                     <option value="sociology">Sociologie</option>
                 </select>
             </div>
@@ -91,8 +93,12 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
                 </select>
             </div>
             <div className={styles.container_btn}>
-                <button onClick={() => setUpdateFormOpen(false)} className={styles.btn_back}>Annuler</button>
-                <button type="submit" disabled={isPending} className={styles.btn_submit}>{isPending ? "Validation en cours" : "Valider"}</button>
+                <Button type="button" onClick={() => setUpdateFormOpen(false)} variant={"btn_back"}>
+                    Annuler
+                </Button>
+                <Button type="submit" variant={"btn_submit"} disabled={isPending}>
+                    {isPending ? "Validation en cours" : "Valider"}
+                </Button>
             </div>
             {state.message && (
                 <p className={state.success ? styles.success_msg : styles.error_msg}>{state.message}</p>

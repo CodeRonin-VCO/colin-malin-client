@@ -47,36 +47,6 @@
     justify-content: space-around;
 }
 
-.btn_back {
-    padding: .8rem 3.2rem;
-    color: var(--text-normal);
-    background-color: transparent;
-    border: 2px solid var(--borders-normal);
-    border-radius: 3.2rem;
-    transition: .3s all ease-out;
-    align-self: center;
-
-    &:hover {
-        color: var(--text-light);
-        background-color: rgba(107, 114, 128, 0.2);
-        border: 2px solid var(--borders-light);
-    }
-}
-
-.btn_submit {
-    margin: 3.2rem 0;
-    padding: .8rem 3.2rem;
-    align-self: center;
-    background-color: var(--primary-normal);
-    border: none;
-    border-radius: 3.2rem;
-    transition: .3s all ease-out;
-
-    &:hover {
-        background-color: var(--primary-dark);
-    }
-}
-
 .required {
     margin-left: 1.6rem;
     font-size: clamp(0.8rem, 0.9rem + 0.2vw, 1.1rem);

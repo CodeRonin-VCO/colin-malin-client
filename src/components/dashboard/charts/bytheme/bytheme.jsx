@@ -42,10 +42,10 @@ export default function ProgressByThemeChart() {
         };
 
         loadScores();
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     // ==== Initialisation des thèmes ====
-    const THEMES = ["mix", "sciences", "culture", "geography", "history", "sport", "sociology"];
+    const THEMES = ["mix", "sciences", "culture", "geography", "history", "sport", "technology", "sociology"];
     const scoresByTheme = THEMES.reduce((acc, theme) => {
         acc[theme] = { totalPoints: 0, totalQuestions: 0 };
         return acc;
