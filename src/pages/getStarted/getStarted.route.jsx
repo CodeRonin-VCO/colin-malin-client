@@ -33,7 +33,7 @@ export default function GetStartedPage() {
                 <article className={styles.cards_container}>
                     <div className={`${styles.card} ${styles.card_quiz}`}>
                         <h5>A toi de jouer !</h5>
-                        <p>Lance-toi dans un quiz solo ou multijoueur</p>
+                        <p>Lance-toi dans un quiz et choisis ton thème</p>
                         <Link to={"/quiz-config"} className={styles.btn}>C'est parti !</Link>
                     </div>
                     <div className={`${styles.card} ${styles.card_stat}`}>
@@ -59,7 +59,7 @@ export default function GetStartedPage() {
                     </div>
                     <div className={styles.info_box_right}>
                         <p className={styles.step_one}>Parcourez notre sélection de thèmes variés, allant de la culture générale aux sciences, en passant par le sport, l’histoire ou encore le cinéma.</p>
-                        <p className={styles.step_two}>Configurez votre partie selon vos préférences : mode solo ou multijoueur pour défier vos amis. Vous pouvez aussi ajuster la difficulté et le nombre de questions.</p>
+                        <p className={styles.step_two}>Configurez votre partie selon vos préférences : mode solo ou multijoueur (à venir) pour défier vos amis. Vous pouvez aussi ajuster la difficulté et le nombre de questions.</p>
                         <p className={styles.step_three}>Répondez aux questions dans un temps limité, gagnez des points et tentez de battre votre record.</p>
                         <p className={styles.step_four}>Consultez vos statistiques détaillées, suivez votre progression et identifiez vos points forts.</p>
                     </div>

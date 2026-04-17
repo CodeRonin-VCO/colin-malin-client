@@ -137,12 +137,20 @@ src/
 ├─ atom/                  # État global avec Jotai
 ├─ components/            # Composants réutilisables
 │  ├─ dashboard/          # Statistiques et graphiques
-│  ├─ forms/              # Formulaires (login, register, quiz, questions)
+│  │  ├─ charts/          # Graphiques (byDateChart, byDifficulty, bytheme)
+│  │  ├─ overview/        # Vue d'ensemble des stats
+│  │  ├─ preferences/     # Préférences utilisateur
+│  │  └─ profile/         # Profil dans le dashboard
+│  ├─ forms/              # Formulaires (login, register, config-game, questions)
 │  ├─ games/              # Composants quiz (solo)
-│  ├─ modal/              # Popups et toasts
+│  ├─ manage-questions/   # Interface de gestion des questions (admin)
+│  ├─ modal/              # Popups (config, résultats) et toasts
 │  ├─ nav/                # Navigation desktop et mobile
-│  └─ protectedRoute/     # Protection des routes authentifiées
+│  ├─ protectedRoute/     # Protection des routes authentifiées
+│  ├─ searchBar/          # Barre de recherche
+│  └─ ui/buttons/         # Composants boutons réutilisables
 ├─ hooks/                 # Custom hooks (useAuth, useGames, useQuestions...)
+├─ layouts/               # Mise en page (header, footer, home-header)
 ├─ pages/                 # Pages principales (home, quiz, stats, admin...)
 ├─ services/              # Appels API centralisés via fetchJson
 ├─ styles/                # Variables SCSS globales
@@ -167,7 +175,7 @@ Composant → Hook custom → Service → fetchJson → API
 
 ## À venir
 
-- Quiz multijoueur
+- Quiz multijoueur + stat entre amis
 - Classement global
 - Consultation du profil des autres utilisateurs
 - Gestion des rôles (admin / utilisateur) via l'espace admin
