@@ -53,10 +53,12 @@ export default function ProgressByThemeChart() {
 
     // ==== Remplissage des scores ====
     scoresData.forEach(score => {
-        const theme = score.theme ?? "mix";
-        if (!scoresByTheme[theme]) scoresByTheme[theme] = { totalPoints: 0, totalQuestions: 0 };
-        scoresByTheme[theme].totalPoints += score.points;
-        scoresByTheme[theme].totalQuestions += score.nb_questions;
+        const themes = Array.isArray(score.theme) ? score.theme : [score.theme ?? "mix"];
+        themes.forEach(theme => {
+            if (!scoresByTheme[theme]) scoresByTheme[theme] = { totalPoints: 0, totalQuestions: 0 };
+            scoresByTheme[theme].totalPoints += score.points;
+            scoresByTheme[theme].totalQuestions += score.nb_questions;
+        });
     });
 
     // ==== Préparation des données pour le chart ====
@@ -79,6 +81,8 @@ export default function ProgressByThemeChart() {
                     "#8A2BE2", // violet (Blue Violet)
                     "#00CED1", // cyan (Dark Turquoise)
                     "#35FF69", // primary green (Vert)
+                    "#FF8C00", // technology - orange 
+                    "#1E90FF", // sociology - bleu    
                 ],
                 borderWidth: 1,
             }

@@ -52,7 +52,7 @@ export default function ProgressByDifficultyChart() {
     const scoresByDiff = difficulties.reduce((acc, diff) => {
         acc[diff] = { totalPoints: 0, totalQuestions: 0 };
         return acc;
-    }, { all: { totalPoints: 0, totalQuestions: 0 } });
+    }, {});
 
     // ==== Remplissage des scores ====
     scoresData.forEach(score => {
@@ -60,10 +60,6 @@ export default function ProgressByDifficultyChart() {
         if (!scoresByDiff[diff]) scoresByDiff[diff] = { totalPoints: 0, totalQuestions: 0 };
         scoresByDiff[diff].totalPoints += score.points;
         scoresByDiff[diff].totalQuestions += score.nb_questions;
-
-        // Ajouter à "all"
-        scoresByDiff.all.totalPoints += score.points;
-        scoresByDiff.all.totalQuestions += score.nb_questions;
     });
 
     // ==== Préparer les données pour Chart.js ====

@@ -56,8 +56,22 @@ export default function ProgressByDateChart() {
 
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-    const dates = ["", ...scoresData.map((s) => formatShortDate(s.created_at))];
-    const scores = [0, ...scoresData.map((s) => (s.points / s.nb_questions) * 10)];
+    // ==== Grouper par jour et calculer la moyenne ====
+    const scoresByDate = {};
+    scoresData.forEach(score => {
+        const day = score.created_at.split("T")[0];
+        if (!scoresByDate[day]) scoresByDate[day] = { totalPoints: 0, totalQuestions: 0, count: 0 };
+        scoresByDate[day].totalPoints += score.points;
+        scoresByDate[day].totalQuestions += score.nb_questions;
+        scoresByDate[day].count += 1;
+    });
+
+    const sortedDays = Object.keys(scoresByDate).sort();
+    const dates = ["", ...sortedDays.map(formatShortDate)];
+    const scores = [0, ...sortedDays.map(day => {
+        const entry = scoresByDate[day];
+        return (entry.totalPoints / entry.totalQuestions) * 10;
+    })];
 
 
     const data = {
@@ -85,9 +99,11 @@ export default function ProgressByDateChart() {
                     label: (context) => {
                         const index = context.dataIndex;
                         if (index === 0) return "";
-                        const score = scoresData[index - 1]; // Décalage nécessaire
-                        return `Score: ${score.correct}/${score.total}`;
-                    },
+                        const day = sortedDays[index - 1];
+                        const entry = scoresByDate[day];
+                        const avg = ((entry.totalPoints / entry.totalQuestions) * 10).toFixed(1);
+                        return `Score moyen: ${avg}/10 (${entry.count} partie${entry.count > 1 ? "s" : ""})`;
+                    }
                 },
             },
         },
