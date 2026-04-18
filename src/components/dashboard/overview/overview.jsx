@@ -15,7 +15,7 @@ export default function OverviewDashboard() {
     const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
     const [percentageResult, setPercentageResult] = useState(0);
     const [bestScore, setBestScore] = useState(null);
-    const [error, setError] = useState(false);
+    const [errorGames, setErrorGames] = useState(false);
 
     useEffect(() => {
         const loadGames = async () => {
@@ -34,7 +34,7 @@ export default function OverviewDashboard() {
 
             } catch (error) {
                 console.error("Erreur lors du chargement des parties :", error);
-                setError(true);
+                setErrorGames(true);
             };
         };
 
@@ -47,7 +47,6 @@ export default function OverviewDashboard() {
 
             } catch (error) {
                 console.error("Erreur lors du chargement du meilleur score :", error);
-                setError(true);
             }
         }
 
@@ -57,7 +56,7 @@ export default function OverviewDashboard() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     // Erreur réseau
-    if (error) {
+    if (errorGames) {
         return (
             <div className={styles.overview_empty}>
                 <h3>Impossible de charger vos statistiques</h3>
