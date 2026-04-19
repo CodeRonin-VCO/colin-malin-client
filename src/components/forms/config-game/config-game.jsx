@@ -41,6 +41,7 @@ export default function ConfigGameForm() {
 
         const errors = {};
         if (!data.nb_questions) errors.nb_questions = "Champ obligatoire";
+        if (data.nb_questions < 5 || data.nb_questions > 50) errors.nb_questions = "Minimum 5 questions, maximum 50";
         if (!data.theme || data.theme.length === 0) errors.theme = "Champ obligatoire";
         if (!data.difficulty) errors.difficulty = "Champ obligatoire";
         if (Object.keys(errors).length > 0) {
@@ -65,7 +66,7 @@ export default function ConfigGameForm() {
     const [state, handleForm, isPending] = useActionState(configAction, initialData);    
 
     return (
-        <form action={handleForm} className={styles.form}>
+        <form action={handleForm} className={styles.form} noValidate>
             <div className={styles.input_group}>
                 <h4 className={styles.title}>
                     Nombre de questions
