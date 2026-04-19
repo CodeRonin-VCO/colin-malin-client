@@ -1,4 +1,4 @@
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import useQuestions from "../../../hooks/useQuestions.js";
 import styles from "./update-questions.module.css";
 import { arraysEqual } from "../../../utils/equalArray.js";
@@ -6,6 +6,12 @@ import Button from "../../ui/buttons/buttons.jsx";
 
 export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, question, setToast }) {
     const { fetchModify } = useQuestions();
+    const [answers, setAnswers] = useState([
+        question.answers[0],
+        question.answers[1],
+        question.answers[2],
+        question.answers[3],
+    ]);
 
     async function addQuestionsAction(prevState, formData) {
         const data = {
@@ -36,7 +42,6 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
 
             return {
                 data,
-                message: "Votre question a bien été ajoutée à notre base de données.",
                 success: true
             }
 
@@ -45,10 +50,17 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
 
             return {
                 data: null,
-                message: error.message || "Echec dans la création de la question.",
                 success: false
             }
         }
+    }
+
+    function handleAnswerChange(index, value) {
+        setAnswers(prev => {
+            const updated = [...prev];
+            updated[index] = value;
+            return updated;
+        });
     }
 
     const initialData = { data: null, errors: {}, message: null };
@@ -75,14 +87,19 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
             </div>
             <div className={styles.input_group}>
                 <label htmlFor="answers">Proposez quatre réponses:</label>
-                <input type="text" id="answer1" name="answer1" defaultValue={question.answers[0]} />
-                <input type="text" id="answer2" name="answer2" defaultValue={question.answers[1]} />
-                <input type="text" id="answer3" name="answer3" defaultValue={question.answers[2]} />
-                <input type="text" id="answer4" name="answer4" defaultValue={question.answers[3]} />
+                <input type="text" id="answer1" name="answer1" value={answers[0]} onChange={(e) => handleAnswerChange(0, e.target.value)} />
+                <input type="text" id="answer2" name="answer2" value={answers[1]} onChange={(e) => handleAnswerChange(0, e.target.value)} />
+                <input type="text" id="answer3" name="answer3" value={answers[2]} onChange={(e) => handleAnswerChange(0, e.target.value)} />
+                <input type="text" id="answer4" name="answer4" value={answers[3]} onChange={(e) => handleAnswerChange(0, e.target.value)} />
             </div>
             <div className={styles.input_group}>
                 <label htmlFor="correct_answer">Inscrivez la bonne réponse:</label>
-                <input type="text" id="correct_answer" name="correct_answer" defaultValue={question.correct_answer} />
+                <select name="correct_answer" id="correct_answer" defaultValue={question.correct_answer}>
+                    <option value="">-- Choisir --</option>
+                    {answers.filter(a => a).map((a, i) => (
+                        <option key={i} value={a}>{a}</option>
+                    ))}
+                </select>
             </div>
             <div className={styles.input_group}>
                 <label htmlFor="difficulty">Inscrivez la difficulté de la question:</label>
@@ -100,9 +117,6 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
                     {isPending ? "Validation en cours" : "Valider"}
                 </Button>
             </div>
-            {state.message && (
-                <p className={state.success ? styles.success_msg : styles.error_msg}>{state.message}</p>
-            )}
         </form>
     )
 }
