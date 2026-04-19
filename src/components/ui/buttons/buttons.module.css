@@ -356,8 +356,11 @@
     }
 
     &.user_profile {
-        margin-bottom: 2.6rem;
         border-bottom: 1px solid var(--borders-normal);
+
+        @media screen and (min-width:576px) {
+            margin-bottom: 2.6rem;
+        }
 
         &>span {
             opacity: 1;
