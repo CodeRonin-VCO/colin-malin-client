@@ -54,7 +54,6 @@ export default function ProfileDashboard() {
             setToast({ message: `${field}  mis à jour avec succès.`, type: "success" });
             setUser(prev => ({ ...prev, [field]: value })); // sync UI
             setEditingField(null);
-
         } catch (error) {
             setToast({ message: `Erreur dans la mise à jour de ${field}`, type: "error" });
             console.error("Erreur mise à jour profil :", error);
