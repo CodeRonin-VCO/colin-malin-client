@@ -33,6 +33,11 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
         if (!arraysEqual(data.answers, question.answers)) updates.answers = data.answers;
         if (data.correct_answer !== question.correct_answer) updates.correct_answer = data.correct_answer;
         if (data.difficulty !== question.difficulty) updates.difficulty = data.difficulty;
+        if (Object.keys(updates).length === 0) {
+            setToast({ message: "Aucune modification détectée.", type: "warning" });
+            setUpdateFormOpen(false);
+            return { data: null, errors: {}, success: false };
+        }
 
 
         try {

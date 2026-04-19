@@ -30,6 +30,7 @@ export default function AdminPage() {
                 )}
                 {seeQuestions && (
                     <>
+                        <h3 className={styles.title}>Gérer vos questions</h3>
                         <ManageQuestionsAdmin />
                         <Button
                             type="button"
