@@ -1,0 +1,41 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg10-normal);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.dialog {
+    max-width: 400px;
+    width: 90%;
+    padding: 2rem;
+    background-color: var(--bg-light-normal);
+    border: 1px solid var(--borders-normal);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px var(--shadow-normal);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.dialog p {
+    color: var(--text-normal);
+    text-align: center;
+    margin: 0 0 1.6rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    &>button {
+        font-size: clamp(1rem, 1.1rem + 0.3vw, 1.4rem);
+        border-radius: 3.2rem;
+        padding: .8rem 3.2rem;
+    }
+}

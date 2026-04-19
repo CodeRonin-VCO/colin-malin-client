@@ -9,6 +9,7 @@ import { CiMenuKebab } from "react-icons/ci";
 import UpdateQuestionsForm from "../forms/update-questions/update-questions.jsx";
 import SearchBar from "../searchBar/searchBar.jsx";
 import Button from "../ui/buttons/buttons.jsx";
+import ConfirmDialog from "../ui/confirm-dialog/confirm-dialog.jsx";
 
 export default function ManageQuestionsAdmin() {
     const { fetchGetAll, fetchDelete, isLoading, hasMore } = useQuestions();
@@ -18,6 +19,7 @@ export default function ManageQuestionsAdmin() {
     let limit = 20;
     const [toast, setToast] = useState(null);
     const [kebabMenuOpen, setKebabMenuOpen] = useState(null);
+    const [confirmDialog, setConfirmDialog] = useState(null);
     const [updateFormOpen, setUpdateFormOpen] = useState(null);
 
     useEffect(() => {
@@ -36,11 +38,9 @@ export default function ManageQuestionsAdmin() {
     async function deleteQuestion(question_id) {
         if (!question_id) return;
 
-        const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer cette question ?");
-        if (!isConfirmed) return;
-
         try {
             await fetchDelete(question_id);
+            setConfirmDialog(null);
             setToast({ message: "Question supprimée avec succès.", type: "success" })
             await fetchGetAll(offset, limit);
 
@@ -90,7 +90,7 @@ export default function ManageQuestionsAdmin() {
                                     </Button>
                                     <Button
                                         type="button"
-                                        onClick={() => deleteQuestion(q.question_id)}
+                                        onClick={() => setConfirmDialog({ question_id: q.question_id })}
                                         variant={"delete_btn"}
                                     >
                                         Supprimer
@@ -125,6 +125,15 @@ export default function ManageQuestionsAdmin() {
 
             {/* TOAST */}
             {toast && (<Toast message={toast.message} type={toast.type} onDismiss={() => setToast(null)} />)}
+
+            {/* ConfirmDialog */}
+            {confirmDialog && (
+                <ConfirmDialog
+                    message="Êtes-vous sûr de vouloir supprimer cette question ?"
+                    onConfirm={() => deleteQuestion(confirmDialog.question_id)}
+                    onCancel={() => setConfirmDialog(null)}
+                />
+            )}
 
         </>
     )

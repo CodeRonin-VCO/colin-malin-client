@@ -48,7 +48,7 @@ export default function GetStartedPage() {
                             <Link to={"/admin"} className={styles.btn}>Je contribue</Link>
                         ) : (
                             <a
-                                href="mailto:votre@email.com?subject=Demande%20acc%C3%A8s%20admin&body=Bonjour%2C%20je%20souhaite%20devenir%20admin%20et%20participer%20%C3%A0%20l%27%C3%A9criture%20des%20questions."
+                                href="mailto:colin.malin@mailfence.com?subject=Demande%20acc%C3%A8s%20admin&body=Bonjour%2C%20je%20souhaite%20devenir%20admin%20et%20participer%20%C3%A0%20l%27%C3%A9criture%20des%20questions."
                                 className={styles.btn}
                             >
                                 Entrer une demande d'accès
