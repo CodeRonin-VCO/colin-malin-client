@@ -8,7 +8,7 @@ import useScores from "../../../hooks/useScores.js";
 import useGames from "../../../hooks/useGames.js";
 import Button from "../../ui/buttons/buttons.jsx";
 import { useState } from "react";
-import Toast from "../toast/toast.jsx";
+import Toast from "./../../ui/toast/toast.jsx";
 
 export default function QuizResultsPopup({ answersLog, questions }) {
     const [user] = useAtom(userAtom);

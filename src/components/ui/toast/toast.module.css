@@ -31,3 +31,8 @@
 .info {
     background-color: var(--info-normal);
 }
+
+.warning {
+    color: var(--warning-darker);
+    background-color: var(--warning-normal);
+}

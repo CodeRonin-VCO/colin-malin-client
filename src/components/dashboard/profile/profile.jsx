@@ -5,7 +5,7 @@ import { useState } from "react";
 import { LuSave } from "react-icons/lu";
 import { MdCancelPresentation } from "react-icons/md";
 import useAuth from "../../../hooks/useAuth.js";
-import Toast from "../../modal/toast/toast.jsx";
+import Toast from "../../ui/toast/toast.jsx";
 import useUser from "../../../hooks/useUser.js";
 import Button from "../../ui/buttons/buttons.jsx";
 
