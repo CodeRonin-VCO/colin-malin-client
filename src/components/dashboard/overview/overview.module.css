@@ -73,8 +73,12 @@
 
 :where(.progress_byDate, .progress_byDifficulty, .progress_bytheme) {
     width: 100%;
-    height: 100%;
+    height: 250px;
     background-color: var(--bg-input-normal);
+
+    @media screen and (min-width:576px) {
+        height: 100%;
+    }
 }
 
 .overview_empty {
