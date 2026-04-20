@@ -9,9 +9,11 @@ import { GoClock, GoPeople, GoTrophy } from "react-icons/go";
 import { PiTarget } from "react-icons/pi";
 import { useAtom } from "jotai";
 import { userAtom } from "../../atom/atom.js";
+import { useState } from "react";
 
 export default function GetStartedPage() {
     const [user] = useAtom(userAtom);
+    const [visible, setVisible] = useState(true);
 
     return (
         <div className="page">
@@ -143,7 +145,17 @@ export default function GetStartedPage() {
                         <p><small>Créées par la communauté</small></p>
                     </div>
                 </article>
-
+                {/* BANDEAU données fictives */}
+                {visible && (
+                    <div className={styles.ticker_wrap}>
+                        <span
+                            className={styles.ticker}
+                            onAnimationEnd={() => setVisible(false)}
+                        >
+                            ⚠️ Projet de démonstration — les données affichées sont fictives
+                        </span>
+                    </div>
+                )}
             </main>
             <FooterLayout />
         </div>

@@ -427,6 +427,26 @@
     grid-area: 2 / 4 / 3 / 6;
 }
 
+.ticker_wrap {
+    width: 100%;
+    padding: .4rem 0;
+    background: rgba(0, 23, 31, 0.85);
+    border-top: 1px solid var(--secondary-normal);
+    backdrop-filter: blur(8px);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.ticker {
+    color: var(--secondary-normal);
+    display: inline-block;
+    white-space: nowrap;
+    animation: scroll 20s linear;
+}
+
 
 @keyframes floatBrain {
     0% {
@@ -439,5 +459,15 @@
 
     100% {
         transform: translateY(0px);
+    }
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(100vw);
+    }
+
+    to {
+        transform: translateX(-100%);
     }
 }
