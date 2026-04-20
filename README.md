@@ -179,8 +179,6 @@ Composant → Hook custom → Service → fetchJson → API
 - Classement global
 - Consultation du profil des autres utilisateurs
 - Gestion des rôles (admin / utilisateur) via l'espace admin
-- Entrer une demande pour devenir admin et contribuer
-- Formulaire de contact
 
 ---
 
