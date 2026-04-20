@@ -66,7 +66,10 @@ export default function ManageQuestionsAdmin() {
                 {questions.map((q) => (
                     <li key={q.question_id} className={styles.card}>
                         <div className={styles.question}><strong>{q.question}</strong></div>
-                        <div className={styles.theme}>{translateValue(q.theme, THEME_MAP)}</div>
+                        <div className={styles.meta}>
+                            <div className={styles.theme}>{translateValue(q.theme, THEME_MAP)}</div>
+                            <div className={`${styles.difficulty} ${q.difficulty === "high" ? styles.high : q.difficulty === "medium" ? styles.medium : styles.low} ${styles.diff_mobile}`}>{translateValue(q.difficulty, DIFFICULTY_MAP)}</div>
+                        </div>
                         <div className={styles.flex}>
                             <div className={styles.container_answers}>
                                 {q.answers.map((a, index) => (

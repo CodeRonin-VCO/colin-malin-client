@@ -21,12 +21,31 @@
 }
 
 .question {
-    width: 90%;
+    width: 100%;
+    
+    @media screen and (min-width:576px)  {
+        width: 90%;
+    }
+}
+
+.meta {
+    margin: 1.6rem 0;
+    display: flex;
+    justify-content: space-between;
+
+    .diff_mobile {
+        display: block;
+    }
+
+    @media screen and (min-width:960px) {
+        .diff_mobile {
+            display: none;
+        }
+    }
 }
 
 .theme {
     width: fit-content;
-    margin: 1.6rem 0;
     padding: .3rem .8rem;
     font-size: clamp(1rem, 1.1rem + 0.3vw, 1.4rem);
     text-transform: none;
@@ -61,6 +80,15 @@
     .correct_answer {
         color: var(--success-normal);
         border: 1px solid var(--success-normal);
+    }
+}
+
+.difficulty {
+    display: none;
+
+    @media screen and (min-width:960px) {
+        display: block;
+        align-self: end;
     }
 }
 
