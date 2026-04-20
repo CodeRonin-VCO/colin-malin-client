@@ -93,9 +93,9 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
             <div className={styles.input_group}>
                 <label htmlFor="answers">Proposez quatre réponses:</label>
                 <input type="text" id="answer1" name="answer1" value={answers[0]} onChange={(e) => handleAnswerChange(0, e.target.value)} />
-                <input type="text" id="answer2" name="answer2" value={answers[1]} onChange={(e) => handleAnswerChange(0, e.target.value)} />
-                <input type="text" id="answer3" name="answer3" value={answers[2]} onChange={(e) => handleAnswerChange(0, e.target.value)} />
-                <input type="text" id="answer4" name="answer4" value={answers[3]} onChange={(e) => handleAnswerChange(0, e.target.value)} />
+                <input type="text" id="answer2" name="answer2" value={answers[1]} onChange={(e) => handleAnswerChange(1, e.target.value)} />
+                <input type="text" id="answer3" name="answer3" value={answers[2]} onChange={(e) => handleAnswerChange(2, e.target.value)} />
+                <input type="text" id="answer4" name="answer4" value={answers[3]} onChange={(e) => handleAnswerChange(3, e.target.value)} />
             </div>
             <div className={styles.input_group}>
                 <label htmlFor="correct_answer">Inscrivez la bonne réponse:</label>
