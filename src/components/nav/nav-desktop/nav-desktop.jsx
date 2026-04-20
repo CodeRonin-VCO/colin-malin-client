@@ -19,9 +19,9 @@ export default function NavDesktop() {
 
     return (
         <nav className={styles.nav}>
-            <NavLink to={"/getStarted"} className={({ isActive }) => isActive ? styles.active : ""}>Get started</NavLink>
+            <NavLink to={"/getStarted"} className={({ isActive }) => isActive ? styles.active : ""}>Accueil</NavLink>
             <NavLink to={"/quiz-config"} className={({ isActive }) => isActive ? styles.active : ""}>Quiz</NavLink>
-            <NavLink to={"/stat"} className={({ isActive }) => isActive ? styles.active : ""}>Dashboard</NavLink>
+            <NavLink to={"/stat"} className={({ isActive }) => isActive ? styles.active : ""}>Profil</NavLink>
             {user.role === "admin" && (
                 <NavLink to={"/admin"} className={({ isActive }) => isActive ? styles.active : ""}>Admin</NavLink>
             )}
