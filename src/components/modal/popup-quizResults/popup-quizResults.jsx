@@ -59,7 +59,7 @@ export default function QuizResultsPopup({ answersLog, questions }) {
         } catch (error) {
             console.error("Erreur lors de la sauvegarde des résultats :", error);
             setToast({ message: "Une erreur est survenue lors de la sauvegarde de tes résultats.", type: "error" });
-            setTimeout(() => navigate("/getStarted"), 3500);
+            setTimeout(() => navigate("/accueil"), 3500);
             return;
 
         } finally {
@@ -71,7 +71,7 @@ export default function QuizResultsPopup({ answersLog, questions }) {
             });
         }
         
-        navigate("/getStarted");
+        navigate("/accueil");
     };
 
 

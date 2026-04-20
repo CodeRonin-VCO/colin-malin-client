@@ -16,7 +16,7 @@ function App() {
             <Routes>
                 <Route index element={<HomeRoute />} />
                 <Route
-                    path="/getStarted"
+                    path="/accueil"
                     element={
                         <ProtectedRoute>
                             <GetStartedPage />
@@ -37,7 +37,7 @@ function App() {
                         </ProtectedRoute>
                     } />
                 <Route
-                    path="/stat"
+                    path="/profil"
                     element={
                         <ProtectedRoute>
                             <StatPage />

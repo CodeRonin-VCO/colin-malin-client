@@ -28,7 +28,7 @@ export default function LoginForm({ setSwitchForm }) {
 
         try {
             await fetchLogin(data.email, data.password);
-            navigate("/getStarted");
+            navigate("/accueil");
 
             return {
                 data,

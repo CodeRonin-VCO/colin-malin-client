@@ -40,7 +40,7 @@ export default function RegisterForm({ setSwitchForm }) {
 
         try {
             await fetchRegister(data.username, data.email, data.password);
-            navigate("/getStarted");
+            navigate("/accueil");
 
             return {
                 data,

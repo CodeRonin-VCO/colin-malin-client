@@ -26,9 +26,9 @@ export default function NavMobile() {
             </div>
             {isOpen && (
                 <nav className={styles.panel}>
-                    <NavLink to={"/getStarted"} className={({ isActive }) => isActive ? styles.active : ""}>Accueil</NavLink>
+                    <NavLink to={"/accueil"} className={({ isActive }) => isActive ? styles.active : ""}>Accueil</NavLink>
                     <NavLink to={"/quiz-config"} className={({ isActive }) => isActive ? styles.active : ""}>Quiz</NavLink>
-                    <NavLink to={"/stat"} className={({ isActive }) => isActive ? styles.active : ""}>Profil</NavLink>
+                    <NavLink to={"/profil"} className={({ isActive }) => isActive ? styles.active : ""}>Profil</NavLink>
                     {user.role === "admin" && (
                         <NavLink to={"/admin"} className={({ isActive }) => isActive ? styles.active : ""}>Admin</NavLink>
                     )}

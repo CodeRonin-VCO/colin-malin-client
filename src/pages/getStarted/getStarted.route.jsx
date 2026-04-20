@@ -41,7 +41,7 @@ export default function GetStartedPage() {
                     <div className={`${styles.card} ${styles.card_stat}`}>
                         <h5>Tes performances</h5>
                         <p>Retrouve ton historique et tes meilleurs scores</p>
-                        <Link to={"/stat"} className={styles.btn}>Voir mes stats</Link>
+                        <Link to={"/profil"} className={styles.btn}>Voir mes stats</Link>
                     </div>
                     <div className={`${styles.card} ${styles.card_admin}`}>
                         <h5>Création de question</h5>
