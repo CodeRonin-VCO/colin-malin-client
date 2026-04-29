@@ -1,47 +1,29 @@
-import { FaTools } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
 import AddQuestionsForm from "../../components/forms/add-questions/add-questions.jsx";
 import FooterLayout from "../../layouts/footer/footer.jsx";
 import HeaderLayout from "../../layouts/header/header.jsx";
 import styles from "./admin.route.module.css";
-import { useState } from "react";
-import ManageQuestionsAdmin from "../../components/manage-questions/manage-questions.jsx";
 import Button from "../../components/ui/buttons/buttons.jsx";
+import { useNavigate } from "react-router";
 
 export default function AdminPage() {
-    const [seeQuestions, setSeeQuestions] = useState(false);
+    const navigate = useNavigate();
 
 
     return (
         <div className="page">
             <HeaderLayout />
             <main className={styles.main}>
-                {!seeQuestions && (
-                    <>
-                        <h3 className={styles.title}>Ajouter une question à la base de données</h3>
-                        <AddQuestionsForm />
-                        <Button
-                            type="button"
-                            onClick={() => setSeeQuestions(true)}
-                            variant={"btn_options"}
-                        >
-                            <span><FaTools /></span>
-                        </Button>
-                    </>
-                )}
-                {seeQuestions && (
-                    <>
-                        <h3 className={styles.title}>Gérer vos questions</h3>
-                        <ManageQuestionsAdmin />
-                        <Button
-                            type="button"
-                            onClick={() => setSeeQuestions(false)}
-                            variant={"btn_back_admin"}
-                        >
-                            Retour
-                        </Button>
-                    </>
-                )}
-
+                <h3 className={styles.title}>Ajouter une question à la base de données</h3>
+                <AddQuestionsForm />
+                <Button
+                    type="button"
+                    onClick={() => navigate("/admin/manage")}
+                    variant={"btn_options"}
+                >
+                    <span><FaRegEdit /></span>
+                    <span>Gérer les questions</span>
+                </Button>
             </main>
             <FooterLayout />
         </div>

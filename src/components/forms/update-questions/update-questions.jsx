@@ -51,7 +51,7 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
             }
 
         } catch (error) {
-            setToast({ message: "Erreur lors de la modification de la question.", type: "error" })
+            setToast({ message: "Erreur lors de la modification de la question.", type: "error" });
 
             return {
                 data: null,
@@ -69,7 +69,7 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
     }
 
     const initialData = { data: null, errors: {}, message: null };
-    const [state, handleForm, isPending] = useActionState(addQuestionsAction, initialData);
+    const [_state, handleForm, isPending] = useActionState(addQuestionsAction, initialData);
 
 
     return (

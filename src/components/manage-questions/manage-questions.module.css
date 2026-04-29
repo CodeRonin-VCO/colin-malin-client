@@ -110,7 +110,6 @@
     bottom: 1rem;
     right: .5rem;
     cursor: pointer;
-    z-index: 11;
     transition: .3s all ease-in-out;
 
     @media screen and (min-width:960px) {

@@ -137,7 +137,7 @@ export default function AddQuestionsForm() {
                     </select>
                 </div>
 
-                <Button type="submit" variant={"btn_submit"} disabled={isPending}>
+                <Button type="submit" variant={"btn_submit"} state={"btn_submit_admin"} disabled={isPending}>
                     {isPending ? "Validation en cours" : "Valider"}
                 </Button>
             </form>

@@ -8,6 +8,7 @@ import QuizPage from "./pages/quiz/quiz.jsx";
 import StatPage from "./pages/stats/stat.route.jsx";
 import AdminPage from "./pages/admin/admin.route.jsx";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute.jsx";
+import ManageQuestionsPage from "./pages/admin-manage/admin-manage.route.jsx";
 
 function App() {
 
@@ -48,6 +49,13 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <AdminPage />
+                        </ProtectedRoute>
+                    } />
+                <Route
+                    path="/admin/manage"
+                    element={
+                        <ProtectedRoute>
+                            <ManageQuestionsPage />
                         </ProtectedRoute>
                     } />
             </Routes>
