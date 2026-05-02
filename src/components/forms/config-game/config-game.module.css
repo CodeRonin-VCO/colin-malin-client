@@ -90,33 +90,24 @@
     grid-template-columns: 1fr;
     gap: 1rem;
 
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .subtitle {
+        color: var(--text-neutral-normal);
+        font-size: clamp(1.2rem, 1.4rem + 0.5vw, 1.8rem);
+    }
+
     @media screen and (max-width: 575px) {
-        label:nth-child(5n+1) {
-            color: var(--text-inverted-normal);
-            background-color: var(--primary-normal);
-            /* bleu cyan */
-        }
-
-        label:nth-child(5n+2) {
+        label {
             background-color: var(--bg-light-normal);
-            /* blanc/clair */
         }
 
-        label:nth-child(5n+3) {
-            color: var(--text-inverted-normal);
-            background-color: var(--bg-inverted-normal);
-            /* gris sombre */
-        }
-
-        label:nth-child(5n+4) {
-            background-color: var(--secondary-normal);
-            /* rose */
-        }
-
-        label:nth-child(5n+5) {
-            color: var(--text-inverted-normal);
-            background-color: var(--solid-normal);
-            /* vert */
+        .mix {
+            border-bottom: 1px solid var(--primary-normal);
         }
     }
 

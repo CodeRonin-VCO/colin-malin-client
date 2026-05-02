@@ -63,13 +63,13 @@ export default function ConfigGameForm() {
     }
 
     const initialData = { data: null, errors: {}, message: null };
-    const [state, handleForm, isPending] = useActionState(configAction, initialData);    
+    const [state, handleForm, isPending] = useActionState(configAction, initialData);
 
     return (
         <form action={handleForm} className={styles.form} noValidate>
             <div className={styles.input_group}>
                 <h4 className={styles.title}>
-                    Nombre de questions
+                    <span>Nombre de questions</span>
                     {state.errors?.nb_questions && (<span className={styles.required}>{state.errors.nb_questions}</span>)}
                 </h4>
                 <input type="number" id="nb_questions" name="nb_questions" min={5} max={50} step={5} />
@@ -100,8 +100,11 @@ export default function ConfigGameForm() {
 
             <div className={`${styles.input_group} ${styles.theme}`}>
                 <h4 className={styles.title}>
-                    Thèmes
-                    {state.errors?.theme && (<span className={styles.required}>{state.errors.theme}</span>)}
+                    <p>
+                        Thèmes
+                        {state.errors?.theme && (<span className={styles.required}>{state.errors.theme}</span>)}
+                    </p>
+                    <p className={styles.subtitle}>Choisis un ou plusieurs thèmes</p>
                 </h4>
                 <label htmlFor="mix" className={`${styles.mix} ${activeTheme.includes("mix") ? styles.active : ""}`}>
                     <input type="checkbox" name="theme" id="mix" value="mix" checked={activeTheme.includes("mix")} onChange={(e) => handleTheme(e.target.id)} />

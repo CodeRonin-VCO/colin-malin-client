@@ -83,7 +83,7 @@ export default function AddQuestionsForm() {
             <form action={handleForm} className={styles.form} ref={formRef}>
                 <div className={styles.input_group}>
                     <label htmlFor="theme">
-                        Choisissez le thème:
+                        Choisissez le thème
                         {state.errors?.theme && (<span className={styles.required}>{state.errors.theme}</span>)}
                     </label>
                     <select name="theme" id="theme">
@@ -98,14 +98,14 @@ export default function AddQuestionsForm() {
                 </div>
                 <div className={styles.input_group}>
                     <label htmlFor="question">
-                        Posez votre question:
+                        Posez votre question
                         {state.errors?.question && (<span className={styles.required}>{state.errors.question}</span>)}
                     </label>
                     <input type="text" id="question" name="question" />
                 </div>
                 <div className={styles.input_group}>
                     <label htmlFor="answers">
-                        Proposez quatre réponses:
+                        Proposez quatre réponses
                         {state.errors?.answers && (<span className={styles.required}>{state.errors.answers}</span>)}
                     </label>
                     <input type="text" id="answer1" name="answer1" placeholder="Option 1" value={answers[0]} onChange={(e) => handleAnswerChange(0, e.target.value)} />
@@ -115,7 +115,7 @@ export default function AddQuestionsForm() {
                 </div>
                 <div className={styles.input_group}>
                     <label htmlFor="correct_answer">
-                        Choisissez la bonne réponse:
+                        Choisissez la bonne réponse
                         {state.errors?.correct_answer && (<span className={styles.required}>{state.errors.correct_answer}</span>)}
                     </label>
                     <select name="correct_answer" id="correct_answer">
@@ -127,7 +127,7 @@ export default function AddQuestionsForm() {
                 </div>
                 <div className={styles.input_group}>
                     <label htmlFor="difficulty">
-                        Inscrivez la difficulté de la question:
+                        Inscrivez la difficulté de la question
                         {state.errors?.difficulty && (<span className={styles.required}>{state.errors.difficulty}</span>)}
                     </label>
                     <select name="difficulty" id="difficulty">

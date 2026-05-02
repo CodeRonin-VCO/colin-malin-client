@@ -6,8 +6,11 @@
 }
 
 .header {
+    background-color: var(--bg-normal);
     display: flex;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
 
     hgroup {
         display: flex;

@@ -98,7 +98,7 @@
     z-index: 0;
 }
 
-.card_quiz {
+.card_quiz, .card_admin {
     &:hover {
         border: 2px solid var(--solid-normal);
     }
@@ -130,24 +130,6 @@
 
         &:hover {
             background-color: var(--secondary-normal);
-        }
-    }
-}
-
-.card_admin {
-    &:hover {
-        border: 2px solid var(--solid-normal);
-    }
-
-    &::before {
-        background: radial-gradient(circle at center, var(--solid-light) 0%, transparent 70%);
-    }
-
-    a {
-        background-color: var(--solid-dark);
-
-        &:hover {
-            background-color: var(--solid-normal);
         }
     }
 }

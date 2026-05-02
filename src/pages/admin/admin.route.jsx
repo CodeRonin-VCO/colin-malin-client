@@ -14,7 +14,7 @@ export default function AdminPage() {
         <div className="page">
             <HeaderLayout />
             <main className={styles.main}>
-                <h3 className={styles.title}>Ajouter une question à la base de données</h3>
+                <h3 className={styles.title}>Ajouter une question</h3>
                 <AddQuestionsForm />
                 <Button
                     type="button"

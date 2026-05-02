@@ -16,13 +16,13 @@ export default function LoginForm({ setSwitchForm }) {
         };
 
         const errors = {};
-        if (!data.email) errors.email = "Required";
-        if (!data.password) errors.password = "Required";
+        if (!data.email) errors.email = "Requis";
+        if (!data.password) errors.password = "Requis";
         if (Object.keys(errors).length > 0) {
             return {
                 data: null,
                 errors,
-                message: "All fields are required."
+                message: "Tous les champs sont obligatoires."
             }
         };
 
@@ -33,14 +33,14 @@ export default function LoginForm({ setSwitchForm }) {
             return {
                 data,
                 errors: {},
-                message: "Form submitted successfully."
+                message: "Le formulaire a été envoyé avec succès."
             };
 
         } catch (error) {
             return {
                 data: null,
                 errors,
-                message: error.message || "Connection failed : invalid credentials."
+                message: error.message || "Échec de la connexion : identifiants non valides."
             }
         }
     };
@@ -71,13 +71,13 @@ export default function LoginForm({ setSwitchForm }) {
             )}
 
             <Button type="submit" variant={"btn_submit"} disabled={isPending}>
-                {isPending ? "Logging in..." : "Log in"}
+                {isPending ? "Connexion..." : "Se connecter"}
             </Button>
 
             <div className={styles.register_link}>
                 <p>Pas encore de compte ?</p>
                 <Button type="button" variant={"btn_switch"} onClick={() => setSwitchForm(false)}>
-                    Sign up
+                    S'inscrire
                 </Button>
             </div>
         </form>

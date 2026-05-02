@@ -19,21 +19,21 @@ export default function RegisterForm({ setSwitchForm }) {
         };
 
         const errors = {};
-        if (!data.username) errors.username = "Required";
-        if (!data.email) errors.email = "Required";
+        if (!data.username) errors.username = "Requis";
+        if (!data.email) errors.email = "Requis";
         if (!data.password) {
-            errors.password = "Required";
+            errors.password = "Requis";
         } else if (!validatePassword(data.password)) {
-            errors.password = "Password must be at least 8 characters, include an uppercase letter, a number, and a special character.";
+            errors.password = "Le mot de passe doit comporter au moins 8 caractères et inclure une lettre majuscule, un chiffre et un caractère spécial.";
         };
-        if (!data.confirmPassword) errors.confirmPassword = "Required";
-        if (data.password !== data.confirmPassword) errors.password = "Password do not match";
+        if (!data.confirmPassword) errors.confirmPassword = "Requis";
+        if (data.password !== data.confirmPassword) errors.password = "Les mots de passe ne correspondent pas.";
 
         if (Object.keys(errors).length > 0) {
             return {
                 data: null,
                 errors,
-                message: "All fields are required.",
+                message: "Tous les champs sont obligatoires.",
                 success: false
             }
         };
@@ -45,7 +45,7 @@ export default function RegisterForm({ setSwitchForm }) {
             return {
                 data,
                 errors: {},
-                message: "Form submitted successfully.",
+                message: "Le formulaire a été envoyé avec succès.",
                 success: true
             };
 
@@ -53,7 +53,7 @@ export default function RegisterForm({ setSwitchForm }) {
             return {
                 data: null,
                 errors,
-                message: error.message || "Connection failed : invalid credentials.",
+                message: error.message || "Échec de la connexion : identifiants non valides.",
                 success: false
             }
         }
@@ -100,14 +100,14 @@ export default function RegisterForm({ setSwitchForm }) {
             )}
             
             <Button type="submit" variant={"btn_submit"} disabled={isPending}>
-                {isPending ? "Signing up.." : "Sign up"}
+                {isPending ? "Inscription en cours..." : "S'inscrire"}
             </Button>
 
 
             <div className={styles.register_link}>
                 <p>Déjà un compte ?</p>
                 <Button type="button" variant={"btn_switch"} onClick={() => setSwitchForm(true)}>
-                    Sign in
+                    Se connecter
                 </Button>
             </div>
         </form>

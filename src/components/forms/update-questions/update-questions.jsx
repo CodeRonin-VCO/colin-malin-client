@@ -75,7 +75,7 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
     return (
         <form action={handleForm} className={styles.form}>
             <div className={styles.input_group}>
-                <label htmlFor="theme">Choisissez le thème:</label>
+                <label htmlFor="theme">Choisissez le thème</label>
                 <select name="theme" id="theme" defaultValue={question.theme}>
                     <option value="sciences">Sciences</option>
                     <option value="culture">Culture</option>
@@ -87,18 +87,18 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
                 </select>
             </div>
             <div className={styles.input_group}>
-                <label htmlFor="question">Posez votre question:</label>
+                <label htmlFor="question">Posez votre question</label>
                 <textarea name="question" id="question" defaultValue={question.question} ></textarea>
             </div>
             <div className={styles.input_group}>
-                <label htmlFor="answers">Proposez quatre réponses:</label>
+                <label htmlFor="answers">Proposez quatre réponses</label>
                 <input type="text" id="answer1" name="answer1" value={answers[0]} onChange={(e) => handleAnswerChange(0, e.target.value)} />
                 <input type="text" id="answer2" name="answer2" value={answers[1]} onChange={(e) => handleAnswerChange(1, e.target.value)} />
                 <input type="text" id="answer3" name="answer3" value={answers[2]} onChange={(e) => handleAnswerChange(2, e.target.value)} />
                 <input type="text" id="answer4" name="answer4" value={answers[3]} onChange={(e) => handleAnswerChange(3, e.target.value)} />
             </div>
             <div className={styles.input_group}>
-                <label htmlFor="correct_answer">Inscrivez la bonne réponse:</label>
+                <label htmlFor="correct_answer">Inscrivez la bonne réponse</label>
                 <select name="correct_answer" id="correct_answer" defaultValue={question.correct_answer}>
                     <option value="">-- Choisir --</option>
                     {answers.filter(a => a).map((a, i) => (
@@ -107,7 +107,7 @@ export default function UpdateQuestionsForm({ questionId, setUpdateFormOpen, que
                 </select>
             </div>
             <div className={styles.input_group}>
-                <label htmlFor="difficulty">Inscrivez la difficulté de la question:</label>
+                <label htmlFor="difficulty">Inscrivez la difficulté de la question</label>
                 <select name="difficulty" id="difficulty" defaultValue={question.difficulty}>
                     <option value="low">Faible</option>
                     <option value="medium">Moyenne</option>

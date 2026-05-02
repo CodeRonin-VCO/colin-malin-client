@@ -28,7 +28,7 @@ export default function GetStartedPage() {
                     <div className={styles.content}>
                         <h3>Prêt à tester vos connaissances ?</h3>
                         <p>Défiez vos amis ou jouez seul sur des thèmes variés. Choisissez un quiz, configurez votre partie, et amusez-vous !</p>
-                        <Link to={"/quiz-config"} className={styles.btn}>Get started</Link>
+                        <Link to={"/quiz-config"} className={styles.btn}>Commencer</Link>
                     </div>
                 </article>
 
@@ -129,12 +129,12 @@ export default function GetStartedPage() {
 
                 <article className={styles.color_box}>
                     <div className={styles.green_box}>
-                        <h3>+300k Users</h3>
-                        <p><small>and counting...</small></p>
+                        <h3>+300k Utilisateurs</h3>
+                        <p><small>et ça continue...</small></p>
                     </div>
                     <div className={styles.pink_box}>
-                        <h3>100% Free!</h3>
-                        <p><small>Forever.</small></p>
+                        <h3>100% Gratuit!</h3>
+                        <p><small>Pour toujours.</small></p>
                     </div>
                     <div className={styles.white_box}>
                         <h3>+10 Thèmes</h3>

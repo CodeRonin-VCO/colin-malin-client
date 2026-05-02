@@ -6,6 +6,7 @@
     border-radius: .8rem;
     display: flex;
     flex-direction: column;
+    backdrop-filter: blur(15px);
 }
 
 .title {

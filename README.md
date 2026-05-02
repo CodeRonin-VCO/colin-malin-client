@@ -30,6 +30,7 @@ Colin-Malin est une application de quiz interactive construite avec React, Expre
 | Tests | Jest (ES Modules via `--experimental-vm-modules`) |
 | Icônes | react-icons |
 | Notifications | Composant Toast custom |
+| Animations | Vanta.js + Three.js |
 
 ---
 
