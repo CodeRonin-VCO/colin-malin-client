@@ -34,8 +34,8 @@ export default function ConfigGameForm() {
     async function configAction(prevState, formData) {
         const data = {
             nb_questions: parseInt(formData.get("nb_questions")),
-            theme: formData.getAll("theme"),
-            difficulty: formData.get("difficulty"),
+            theme: activeTheme,
+            difficulty: activeDifficulty,
             mode: "solo"
         };
 
