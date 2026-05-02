@@ -1,16 +1,18 @@
 import { useActionState, useState } from "react";
 import styles from "./config-game.module.css";
 import { useAtom } from "jotai";
-import { gameConfigAtom } from "../../../atom/atom.js";
+import { gameConfigAtom, questionsAtom } from "../../../atom/atom.js";
 import { useNavigate } from "react-router";
 import Button from "../../ui/buttons/buttons.jsx";
 
 export default function ConfigGameForm() {
     // Connexion avec game pour stocker la partie et les questions
     const [, setGameConfig] = useAtom(gameConfigAtom);
+    const [, setQuestions] = useAtom(questionsAtom);
     const [activeDifficulty, setActiveDifficulty] = useState("");
     const [activeTheme, setActiveTheme] = useState([]);
     const navigate = useNavigate();
+
 
     function handleTheme(targetId) {
         if (targetId === "mix") {
@@ -52,6 +54,7 @@ export default function ConfigGameForm() {
             }
         };
 
+        setQuestions([]);
         setGameConfig(data);
         navigate("/quiz");
 
