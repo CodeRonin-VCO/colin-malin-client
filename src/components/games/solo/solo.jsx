@@ -31,6 +31,8 @@ export default function SoloGame() {
     const timeRef = useRef(null);
 
     useEffect(() => {
+        if (!currentQuestion) return;
+        
         // Init timer
         setTimer(15);
 
